@@ -1,0 +1,69 @@
+{
+    "title": "Portugal Beach Cams",
+    "beaches": [
+        {
+            "name": "Mareta (Sagres)",
+            "url": "https://camsecure.co/HLS/sagressholidays.m3u8"
+        },
+        {
+            "name": "Luz (BeachCam)",
+            "url": "https://video-auth1.iol.pt/beachcam/luz/playlist.m3u8"
+        },
+        {
+            "name": "Luz (Surfline)",
+            "url": "https://cams.cdn-surfline.com/cdn-int/pt-praiadaluz/playlist.m3u8"
+        },
+        {
+            "name": "Lagos (BeachCam)",
+            "url": "https://video-auth1.iol.pt/beachcam/meiapraia/playlist.m3u8"
+        },
+        {
+            "name": "Lagos (Surfline)",
+            "url": "https://cams.cdn-surfline.com/cdn-int/pt-meiapraia/playlist.m3u8"
+        },
+        {
+            "name": "Arrifana",
+            "url": "https://cams.cdn-surfline.com/cdn-int/pt-arrifana/playlist.m3u8"
+        },
+        {
+            "name": "Amoreira",
+            "url": "https://video-auth1.iol.pt/beachcam/bcamoreira/playlist.m3u8"
+        },
+        {
+            "name": "Zambujeira do Mar",
+            "url": "https://video-auth1.iol.pt/beachcam/zambujeira/playlist.m3u8"
+        },
+        {
+            "name": "Super Tubos (Surfline)",
+            "url": "https://cams.cdn-surfline.com/cdn-int/pt-supertubes/playlist.m3u8"
+        },
+        {
+            "name": "Super Tubos (BeachCam)",
+            "url": "https://video-auth1.iol.pt/beachcam/supertubos/playlist.m3u8"
+        },
+        {
+            "name": "São Torpes (BeachCam)",
+            "url": "https://video-auth1.iol.pt/beachcam/saotorpes/playlist.m3u8"
+        },
+        {
+            "name": "São Torpes (Surfline)",
+            "url": "https://cams.cdn-surfline.com/cdn-int/pt-storpespier/playlist.m3u8"
+        },
+        {
+            "name": "Nazare (Surfline)",
+            "url": "https://cams.cdn-surfline.com/cdn-int/pt-nazareov/playlist.m3u8"
+        },
+        {
+            "name": "Nazare - Praia do Norte (BeachCam)",
+            "url": "https://video-auth1.iol.pt/beachcam/canhaonazare/playlist.m3u8"
+        },
+        {
+            "name": "Nazare - Panoramic (BeachCam)",
+            "url": "https://video-auth1.iol.pt/beachcam/nazareparadonorte/playlist.m3u8"
+        },
+        {
+            "name": "Gale",
+            "url": "https://video-auth1.iol.pt/beachcam/bcgale/chunks.m3u8"
+        }
+    ]
+}
