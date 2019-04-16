@@ -5,66 +5,64 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 const workboxPlugin = require('workbox-webpack-plugin');
-
-const DIST_DIR = 'dist/';
+const CopyPlugin = require('copy-webpack-plugin');
 
 loaders.push({
     test: /\.scss$/,
-    loader: ExtractTextPlugin.extract({fallback: 'style-loader', use : 'css-loader?sourceMap&localIdentName=[local]___[hash:base64:5]!sass-loader?outputStyle=expanded'}),
-    exclude: ['node_modules']
+    loader: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: 'css-loader?sourceMap&localIdentName=[local]___[hash:base64:5]!sass-loader?outputStyle=expanded',
+    }),
+    exclude: ['node_modules'],
 });
 
 module.exports = {
-    entry: [
-        './cams/index.js',
-        './cams/styles.scss'
-    ],
+    entry: ['./cams/index.js', './cams/styles.scss'],
     output: {
         publicPath: './',
         path: path.join(__dirname, 'dist'),
-        filename: '[chunkhash].js'
+        filename: '[chunkhash].js',
     },
     resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: ['.js', '.jsx'],
     },
     module: {
-        loaders
+        loaders,
     },
     plugins: [
-        new WebpackCleanupPlugin(
-            {
-                exclude: ["sw.js", "workbox-sw.prod.v2.1.0.js", "workbox-sw.prod.v2.1.0.js.map"],
-            }
-        ),
+        new WebpackCleanupPlugin({
+            exclude: ['sw.js', 'workbox-sw.prod.v2.1.0.js', 'workbox-sw.prod.v2.1.0.js.map'],
+        }),
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: '"production"'
-            }
+                NODE_ENV: '"production"',
+            },
         }),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false,
                 screw_ie8: true,
                 drop_console: true,
-                drop_debugger: true
-            }
+                drop_debugger: true,
+            },
         }),
         new webpack.optimize.OccurrenceOrderPlugin(),
         new ExtractTextPlugin({
             filename: 'style.css',
-            allChunks: true
+            allChunks: true,
         }),
         new HtmlWebpackPlugin({
             template: './cams/index.html',
             files: {
                 css: ['style.css'],
-                js: ['bundle.js']
-            }
+                js: ['bundle.js'],
+            },
         }),
         new workboxPlugin({
             globDirectory: './dist',
             globPatterns: ['**/*.{html,js,css}'],
-            swDest: path.join('dist', 'sw.js')
-        })
-    ]
+            swDest: path.join('dist', 'sw.js'),
+        }),
+        new CopyPlugin([{ from: './manifest.json', to: './' }]),
+    ],
 };

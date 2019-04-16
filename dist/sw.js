@@ -19,12 +19,12 @@ importScripts('workbox-sw.prod.v2.1.3.js');
  */
 const fileManifest = [
   {
-    "url": "adc63a38b608df1e5a26.js",
-    "revision": "71ce51f128149ae8b93d6cc7a998c345"
+    "url": "b95a51b3a7fa91d02bea.js",
+    "revision": "aca277492d5e667437e8c7a03703a504"
   },
   {
     "url": "index.html",
-    "revision": "70a3ad5dc8f9e2e02d58ead698a8ab04"
+    "revision": "5d7efcf433800fbbc16d48972f312db4"
   },
   {
     "url": "style.css",
