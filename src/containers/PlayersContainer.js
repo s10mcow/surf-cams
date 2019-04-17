@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import Players from '../components/Players';
-import { setNewCamera } from '../actions';
-import { addNewCamera } from '../actions';
-import { deleteCamera } from '../actions';
+import { setNewCamera } from '../store/actions';
+import { addNewCamera } from '../store/actions';
+import { deleteCamera } from '../store/actions';
 import { beaches } from '../beaches.json';
 
 const mapStateToProps = state => {

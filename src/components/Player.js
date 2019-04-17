@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Hls from 'hls.js';
-import utils from '../utils/utils';
+
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
+
 import Option from 'muicss/lib/react/option';
 import Select from 'muicss/lib/react/select';
 import Button from 'muicss/lib/react/button';
@@ -17,7 +17,7 @@ export default class Player extends Component {
     }
 
     setupPlayer(url) {
-        this.setState({showError: false}, () => {    
+        this.setState({showError: false}, () => {
             if(this.state.hls) {
                 this.state.hls.destroy();
                 this.setState({hls: false});
