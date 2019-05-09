@@ -1,6 +1,10 @@
 import { css } from 'styled-components';
 
 export default css`
+    html {
+        overflow-x: hidden;
+    }
+
     body {
         @import url('https://fonts.googleapis.com/css?family=Roboto');
         display: flex;
