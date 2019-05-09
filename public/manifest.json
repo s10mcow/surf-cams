@@ -26,5 +26,5 @@
     ],
     "theme_color": "grey",
     "background_color": "white",
-    "start_url": "cams/index.html"
+    "start_url": "index.html"
 }
