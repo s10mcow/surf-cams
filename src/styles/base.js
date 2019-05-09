@@ -59,6 +59,7 @@ export default css`
         width: 100vw;
         overflow: auto;
         min-height: 100vh;
+        overflow-x: hidden;
 
         &__header {
             display: flex;
@@ -123,6 +124,7 @@ export default css`
             height: 0;
             flex: 1;
             width: 100%;
+            overflow: hidden;
 
             video {
                 width: 100% !important;
@@ -169,7 +171,7 @@ export default css`
             opacity: 0;
             position: absolute;
             top: 0;
-            right: 5px;
+            right: 0;
         }
 
         h2 {
@@ -183,6 +185,7 @@ export default css`
         flex-direction: column;
         padding: 5px;
         width: 97%;
+        overflow: hidden;
         & > .mui-btn {
             margin-top: 30px;
         }
