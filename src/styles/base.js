@@ -67,7 +67,7 @@ export default css`
             align-items: center;
             height: 65px;
             width: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: #777777;
             color: white;
             padding-bottom: 10px;
             h1 {
