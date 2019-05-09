@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
-
 import getStoreAndPersistor, { history } from './store/store';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import { ConnectedRouter } from 'connected-react-router';

@@ -1,15 +1,30 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
-}
+    "short_name": "PTTP Web Cams",
+    "name": "Powder to the people! Web Cams.",
+    "display": "standalone",
+    "icons": [
+      {
+        "src": "public/apple-touch-icon-192x192-precomposed.png",
+        "type": "image/png",
+        "sizes": "48x48"
+      },
+      {
+        "src": "public/apple-touch-icon-192x192-precomposed.png",
+        "type": "image/png",
+        "sizes": "96x96"
+      },
+      {
+        "src": "public/apple-touch-icon-192x192-precomposed.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "public/apple-touch-icon-512x512-precomposed.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "theme_color": "grey",
+    "background_color": "white",
+    "start_url": "cams/index.html"
+  }
