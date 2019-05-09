@@ -101,15 +101,21 @@ export default css`
             justify-content: center;
             align-items: center;
             height: 100%;
-            padding-top: 25%;
-            padding-bottom: 31.25%;
+
             div {
-                flex: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                width: 120px;
+                height: 120px;
+                background-color: #dc3545;
+                color: white;
+                font-weight: bold;
             }
         }
 
         &__content {
-            padding-bottom: 56.25%;
             height: 0;
             flex: 1;
             width: 100%;

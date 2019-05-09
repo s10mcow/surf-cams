@@ -12,90 +12,85 @@ export default class Player extends Component {
         super(props);
         this.state = {
             hls: false,
-            showError: false
+            showError: false,
         };
     }
 
     setupPlayer(url) {
-        this.setState({showError: false}, () => {
-            if(this.state.hls) {
+        this.setState({ showError: false }, () => {
+            if (this.state.hls) {
                 this.state.hls.destroy();
-                this.setState({hls: false});
+                this.setState({ hls: false });
             }
             if (Hls.isSupported()) {
                 let beachHls = new Hls();
                 beachHls.loadSource(url);
                 beachHls.attachMedia(this.refs.video);
                 beachHls.on(Hls.Events.MANIFEST_PARSED, () => {
-                    console.log('parsed playing...')
-                    this.refs.video.play()
+                    this.refs && this.refs.video && this.refs.video.play();
                 });
                 beachHls.on(Hls.Events.ERROR, (event, err) => {
-                    console.log(err)
-                    if(err.response && err.response.code === 404) {
-                        this.setState({showError: true})
+                    console.log(err);
+                    if (err.response && err.response.code === 404) {
+                        this.setState({ showError: true });
                         beachHls.destroy();
                     }
                 });
-                this.setState({hls: beachHls})
+                this.setState({ hls: beachHls });
             } else {
                 this.refs.video.src = url;
                 this.refs.video.play();
             }
-        })
-
+        });
     }
 
     delete() {
-        this.state.hls.destroy();
-        this.setState({hls: false}, () => this.props.deleteCamera({index: this.props.index}));
+        this.state.hls && this.state.hls.detroy && this.state.hls.destroy();
+        this.setState({ hls: false }, () => this.props.deleteCamera({ index: this.props.index }));
     }
 
     componentDidMount() {
-        this.setupPlayer(this.props.url)
+        this.setupPlayer(this.props.url);
     }
 
-
     componentWillReceiveProps(nextProps) {
-        if(nextProps.url !== this.props.url) {
-            this.setupPlayer(nextProps.url)
+        if (nextProps.url !== this.props.url) {
+            this.setupPlayer(nextProps.url);
         }
     }
 
     render() {
-
-        const footer =
+        const footer = (
             <div className="player__footer__uncollapsed">
                 <Select
                     value={this.props.url}
-                    onChange={event => this.props.onClick({index: this.props.index, url: event.target.value})}>
-                    {this.props.beachNames.map((beach, key) => <Option key={key} value={beach.url} label={beach.name}/>)}
+                    onChange={event => this.props.onClick({ index: this.props.index, url: event.target.value })}
+                >
+                    {this.props.beachNames.map((beach, key) => (
+                        <Option key={key} value={beach.url} label={beach.name} />
+                    ))}
                 </Select>
+            </div>
+        );
 
-            </div>;
-
-        const playerContent =
-
-            this.state.showError ?
-
+        const playerContent = this.state.showError ? (
             <main className="player__error">
-                <div>Whoops... Camera isnt working.</div>
-                <div>:(</div>
+                <div>Camera offline.</div>
             </main>
-            :
+        ) : (
             <main className="player__content">
-                <Button className="player__delete" variant="fab" color="danger" onClick={() => this.delete()}>&times;</Button>
-                <video ref="video" autoPlay controls></video>
+                <Button className="player__delete" variant="fab" color="danger" onClick={() => this.delete()}>
+                    &times;
+                </Button>
+                <video ref="video" autoPlay controls />
             </main>
+        );
 
         return (
             <article className="player">
-
                 {playerContent}
 
-                <footer className="player__footer">
-                    {footer}
-                </footer>
+                <footer className="player__footer">{footer}</footer>
             </article>
         );
     }
@@ -104,5 +99,5 @@ export default class Player extends Component {
 Player.propTypes = {
     url: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
 };
