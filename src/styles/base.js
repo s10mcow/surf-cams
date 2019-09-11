@@ -55,7 +55,6 @@ export default css`
         justify-content: flex-start;
         align-items: center;
         flex-direction: column;
-        padding: 0 5px 5px;
         width: 100vw;
         overflow: auto;
         min-height: 100vh;
@@ -106,6 +105,7 @@ export default css`
             justify-content: center;
             align-items: center;
             height: 100%;
+            margin-top: 20px;
 
             div {
                 display: flex;
