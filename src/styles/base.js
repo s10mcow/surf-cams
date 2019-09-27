@@ -121,7 +121,6 @@ export default css`
         }
 
         &__content {
-            height: 0;
             flex: 1;
             width: 100%;
             overflow: hidden;
