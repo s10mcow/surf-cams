@@ -184,7 +184,6 @@ export default css`
         flex-direction: column;
         padding: 5px;
         width: 97%;
-        overflow: hidden;
         & > .mui-btn {
             margin-top: 30px;
         }

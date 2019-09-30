@@ -59,16 +59,31 @@ export default class Player extends Component {
         }
     }
 
+    changeCamera = (index, url) => {
+        if (url === 'suggest_new_camera') {
+            const a = document.createElement('a');
+            a.href = 'mailto:powdertothepeeps@gmail.com?subject=New Camera Suggestion';
+            a.target = '_blank';
+            a.click();
+            return this.props.onClick({
+                index,
+                url: 'https://cams.cdn-surfline.com/cdn-int/pt-arrifana/playlist.m3u8',
+            });
+        }
+        this.props.onClick({ index, url });
+    };
+
     render() {
         const footer = (
             <div className="player__footer__uncollapsed">
                 <Select
                     value={this.props.url}
-                    onChange={event => this.props.onClick({ index: this.props.index, url: event.target.value })}
+                    onChange={event => this.changeCamera(this.props.index, event.target.value)}
                 >
                     {this.props.beachNames.map((beach, key) => (
                         <Option key={key} value={beach.url} label={beach.name} />
                     ))}
+                    <Option key="suggest_new_camera" value="suggest_new_camera" label="* Suggest New Camera *" />
                 </Select>
             </div>
         );
