@@ -2,6 +2,14 @@
     "title": "Portugal Beach Cams",
     "beaches": [
         {
+            "name": "Madeira (Jardim do Mar)",
+            "url": "https://video-auth1.iol.pt/beachcam/madeirajardimdomar/playlist.m3u8"
+        },
+        {
+            "name": "Alvor",
+            "url": "https://video-auth1.iol.pt/beachcam/alvor/playlist.m3u8"
+        },
+        {
             "name": "Mareta (Sagres)",
             "url": "https://camsecure.co/HLS/sagressholidays.m3u8"
         },
