@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
+        "@material-ui/core": "^4.5.0",
         "connected-react-router": "^6.4.0",
         "hls.js": "^0.8.4",
         "muicss": "^0.9.27",

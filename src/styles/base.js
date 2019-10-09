@@ -187,6 +187,12 @@ export default css`
         & > .mui-btn {
             margin-top: 30px;
         }
+        &__dialog {
+            p {
+                color: black;
+                font-size: 20px;
+            }
+        }
     }
 
     .players {

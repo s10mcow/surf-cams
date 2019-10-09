@@ -7,6 +7,7 @@ import { beaches } from '../beaches.json';
 
 const mapStateToProps = state => {
     return {
+        showModal: state.app && state.app.cams === 2,
         cameras: state.cameras,
         beachNames: Object.keys(beaches)
             .reduce((memo, beachKey) => memo.concat(beaches[beachKey]), [])
