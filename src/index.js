@@ -7,6 +7,9 @@ import getStoreAndPersistor, { history } from './store/store';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import { ConnectedRouter } from 'connected-react-router';
 import BaseStyles from './base-styles';
+import ReactGA from 'react-ga';
+
+ReactGA.initialize('UA-107212380-1');
 
 const { store, persistor } = getStoreAndPersistor();
 

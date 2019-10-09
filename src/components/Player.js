@@ -7,6 +7,8 @@ import Option from 'muicss/lib/react/option';
 import Select from 'muicss/lib/react/select';
 import Button from 'muicss/lib/react/button';
 
+import ReactGA from 'react-ga';
+
 export default class Player extends Component {
     constructor(props) {
         super(props);
@@ -70,6 +72,7 @@ export default class Player extends Component {
                 url: 'https://cams.cdn-surfline.com/cdn-int/pt-arrifana/playlist.m3u8',
             });
         }
+        ReactGA.event({ category: 'Camera Player', action: 'Change Camera', label: url });
         this.props.onClick({ index, url });
     };
 
