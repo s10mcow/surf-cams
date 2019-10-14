@@ -2,6 +2,10 @@
     "title": "Portugal Beach Cams",
     "beaches": [
         {
+            "name": "Porto de Mos (Lagos)",
+            "url": "https://hddn01.skylinewebcams.com/live.m3u8?a=q77s3k0c3etc3evemvbu04s1o2"
+        },
+        {
             "name": "Foz do Lizandro",
             "url": "https://video-auth1.iol.pt/beachcam/fozdolizandro/playlist.m3u8"
         },
