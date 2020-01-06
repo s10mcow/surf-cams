@@ -6,7 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 
-export default function PlayersContainer({ cameras, beachNames, deleteCamera, addNewCamera, onClick, showModal }) {
+export default function PlayersContainer({ cameras, beachNames, deleteCamera, addNewCamera, updateCamera, showModal }) {
     const players = cameras.length === 1 ? 'players players--single' : 'players';
     const [open, setOpen] = React.useState(false);
 
@@ -59,7 +59,7 @@ export default function PlayersContainer({ cameras, beachNames, deleteCamera, ad
                         url={camera.url}
                         beachNames={beachNames}
                         deleteCamera={deleteCamera}
-                        onClick={onClick}
+                        updateCamera={updateCamera}
                     />
                 ))}
             </section>

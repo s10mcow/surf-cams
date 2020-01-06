@@ -1,14 +1,12 @@
-import { beaches } from '../../beaches.json';
+import beaches from '../../beaches';
 
-const initalState = beaches.slice(4, 6);
+const initalState = beaches.pt.beaches.slice(4, 6);
 
 const cameras = (state = initalState, action) => {
     switch (action.type) {
         case 'SET_NEW_CAMERA':
             const newState = [...state];
-            newState[action.camera.index] = beaches
-                .filter(beach => beach.url === action.camera.url)
-                .reduce((memo, beach) => beach, {});
+            newState[action.camera.index] = { url: action.camera.url };
             return newState;
         case 'ADD_NEW_CAMERA':
             return [

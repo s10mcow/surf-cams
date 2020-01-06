@@ -1,20 +1,42 @@
-import React, { Component } from 'react';
-import Hls from 'hls.js';
+import React, { PureComponent } from "react";
+import styled from "styled-components";
+import Hls from "hls.js";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import Option from 'muicss/lib/react/option';
-import Select from 'muicss/lib/react/select';
-import Button from 'muicss/lib/react/button';
+import Option from "muicss/lib/react/option";
+import Select from "muicss/lib/react/select";
+import Button from "muicss/lib/react/button";
 
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga";
+import Feedback from "./Feedback";
 
-export default class Player extends Component {
+const PlayerWrapper = styled.div`
+    display: flex;
+    position: relative;
+    .player {
+        transition: all 0.2s ease-in-out;
+        transform: ${props =>
+            props.showFeedback ? "translateX(1000px)" : "translateX(0px)"};
+    }
+    .feedback {
+        display: flex;
+        position: absolute;
+        transition: all 0.2s ease-in-out;
+        transform: ${props =>
+            props.showFeedback ? "translateX(0px)" : "translateX(-1000px)"};
+
+        width: 100%;
+    }
+`;
+
+export default class Player extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
             hls: false,
             showError: false,
+            showFeedback: true
         };
     }
 
@@ -48,7 +70,9 @@ export default class Player extends Component {
 
     delete() {
         this.state.hls && this.state.hls.detroy && this.state.hls.destroy();
-        this.setState({ hls: false }, () => this.props.deleteCamera({ index: this.props.index }));
+        this.setState({ hls: false }, () =>
+            this.props.deleteCamera({ index: this.props.index })
+        );
     }
 
     componentDidMount() {
@@ -62,18 +86,24 @@ export default class Player extends Component {
     }
 
     changeCamera = (index, url) => {
-        if (url === 'suggest_new_camera') {
-            const a = document.createElement('a');
-            a.href = 'mailto:powdertothepeeps@gmail.com?subject=New Camera Suggestion';
-            a.target = '_blank';
+        if (url === "suggest_new_camera") {
+            const a = document.createElement("a");
+            a.href =
+                "mailto:powdertothepeeps@gmail.com?subject=New Camera Suggestion";
+            a.target = "_blank";
             a.click();
             return this.props.onClick({
                 index,
-                url: 'https://cams.cdn-surfline.com/cdn-int/pt-arrifana/playlist.m3u8',
+                url:
+                    "https://cams.cdn-surfline.com/cdn-int/pt-arrifana/playlist.m3u8"
             });
         }
-        ReactGA.event({ category: 'Camera Player', action: 'Change Camera', label: url });
-        this.props.onClick({ index, url });
+        ReactGA.event({
+            category: "Camera Player",
+            action: "Change Camera",
+            label: url
+        });
+        this.props.updateCamera({ index, url });
     };
 
     render() {
@@ -81,12 +111,22 @@ export default class Player extends Component {
             <div className="player__footer__uncollapsed">
                 <Select
                     value={this.props.url}
-                    onChange={event => this.changeCamera(this.props.index, event.target.value)}
+                    onChange={event =>
+                        this.changeCamera(this.props.index, event.target.value)
+                    }
                 >
                     {this.props.beachNames.map((beach, key) => (
-                        <Option key={key} value={beach.url} label={beach.name} />
+                        <Option
+                            key={key}
+                            value={beach.url}
+                            label={beach.name}
+                        />
                     ))}
-                    <Option key="suggest_new_camera" value="suggest_new_camera" label="* Suggest New Camera *" />
+                    <Option
+                        key="suggest_new_camera"
+                        value="suggest_new_camera"
+                        label="* Suggest New Camera *"
+                    />
                 </Select>
             </div>
         );
@@ -97,7 +137,12 @@ export default class Player extends Component {
             </main>
         ) : (
             <main className="player__content">
-                <Button className="player__delete" variant="fab" color="danger" onClick={() => this.delete()}>
+                <Button
+                    className="player__delete"
+                    variant="fab"
+                    color="danger"
+                    onClick={() => this.delete()}
+                >
                     &times;
                 </Button>
                 <video ref="video" autoPlay controls />
@@ -105,17 +150,27 @@ export default class Player extends Component {
         );
 
         return (
-            <article className="player">
-                {playerContent}
+            <PlayerWrapper showFeedback={this.state.showFeedback}>
+                <article className="player">
+                    {playerContent}
 
-                <footer className="player__footer">{footer}</footer>
-            </article>
+                    <footer className="player__footer">{footer}</footer>
+                    <Button
+                        color="secondary"
+                        onClick={() => this.setState({ showFeedback: true })}
+                    >
+                        How was it?
+                    </Button>
+                </article>
+                <Feedback
+                    toggle={() => this.setState({ showFeedback: false })}
+                />
+            </PlayerWrapper>
         );
     }
 }
 
 Player.propTypes = {
     url: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    onClick: PropTypes.func.isRequired,
+    updateCamera: PropTypes.func.isRequired
 };

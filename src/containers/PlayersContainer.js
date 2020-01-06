@@ -3,14 +3,14 @@ import Players from '../components/Players';
 import { setNewCamera } from '../store/actions';
 import { addNewCamera } from '../store/actions';
 import { deleteCamera } from '../store/actions';
-import { beaches } from '../beaches.json';
+import { getBeaches } from '../store/reducers/beaches.reducer';
 
 const mapStateToProps = state => {
     return {
         showModal: state.app && state.app.cams === 2,
         cameras: state.cameras,
-        beachNames: Object.keys(beaches)
-            .reduce((memo, beachKey) => memo.concat(beaches[beachKey]), [])
+        beachNames: getBeaches(state)
+            .reduce((memo, beachKey) => memo.concat([beachKey]), [])
             .sort((a, b) => {
                 if (a.name > b.name) return 1;
                 if (a.name < b.name) return -1;
@@ -21,7 +21,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onClick: camera => dispatch(setNewCamera(camera)),
+        updateCamera: camera => dispatch(setNewCamera(camera)),
         addNewCamera: () => dispatch(addNewCamera()),
         deleteCamera: camera => dispatch(deleteCamera(camera)),
     };
