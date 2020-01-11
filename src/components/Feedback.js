@@ -3,7 +3,8 @@ import styled from "styled-components";
 import Button from "muicss/lib/react/button";
 import ReactGA from "react-ga";
 import { FilePicker } from "react-file-picker";
-
+import request from "superagent";
+import Config from "../config/config";
 import { CameraAlt } from "@material-ui/icons";
 
 const Feedback = styled.article`
@@ -36,10 +37,34 @@ export default ({ toggle }) => {
         fileRef.current.click();
     };
 
-    const setImageFromB64 = b => {
-        console.log(b);
-        const image = URL.createObjectURL(b);
+    const onPhotoUploadProgress = (id, fileName, progress) => {
+        console.log(id, fileName, progress);
+    };
+
+    const onPhotoUploaded = (id, fileName, response) => {
+        console.log(id, fileName, response);
+    };
+
+    const setImageFromB64 = file => {
+        const image = URL.createObjectURL(file);
         setImage(image);
+
+        const url = `https://api.cloudinary.com/v1_1/${Config.cloud_name}/upload`;
+
+        const fileName = file.name;
+        var photoId = new Date();
+        request
+            .post(url)
+            .field("upload_preset", Config.upload_preset)
+            .field("file", file)
+            .field("tags", "myphotoalbum")
+            .field("context", fileName ? `photo=${fileName}` : "")
+            .on("progress", progress =>
+                onPhotoUploadProgress(photoId, file.name, progress)
+            )
+            .end((error, response) => {
+                onPhotoUploaded(photoId, fileName, response);
+            });
     };
     return (
         <Feedback className="feedback">
