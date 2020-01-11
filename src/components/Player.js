@@ -14,6 +14,7 @@ import Feedback from "./Feedback";
 const PlayerWrapper = styled.div`
     display: flex;
     position: relative;
+    overflow: hidden;
     .player {
         transition: all 0.2s ease-in-out;
         transform: ${props =>

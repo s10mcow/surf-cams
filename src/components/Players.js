@@ -74,7 +74,6 @@ export default function PlayersContainer({
             <Button color="primary" onClick={addNewCamera}>
                 Add Camera
             </Button>{" "}
-            <input type="file" accept="image/*" />
             <div id="wg_target_div_512670_72189470" />
         </div>
     );
