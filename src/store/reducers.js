@@ -7,6 +7,8 @@ import beaches from './reducers/beaches.reducer';
 
 import app from './reducers/app';
 
+import feedback from './feedback/feedback.reducer';
+
 export default history =>
     combineReducers({
         router: connectRouter(history),
@@ -14,4 +16,5 @@ export default history =>
         cameras,
         app,
         beaches,
+        feedback,
     });

@@ -1,41 +1,46 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import createRootReducer from './reducers';
+import rootReducer from './reducers';
 import { createBrowserHistory } from 'history';
 import { routerMiddleware } from 'connected-react-router';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-
+import SagaManager from './sagas';
+import createSagaMiddleware from 'redux-saga';
 // MIDDLEWARES
 export const history = createBrowserHistory();
 
 const initialState = {};
-const enhancers = [];
+const router = routerMiddleware(history);
 
-const middleware = [routerMiddleware(history)];
+const sagaMiddleware = createSagaMiddleware({
+    onError: error => {
+        console.error(error);
+        if (process.env.NODE_ENV === 'development') {
+            console.log(error);
+        }
+    },
+});
 
 const createReducer = createRootReducer => {
     const config = {
         key: 'root',
-        whitelist: ['visibilityFilter', 'cameras'],
+        whitelist: ['visibilityFilter', 'cameras', 'feedback'],
         storage,
     };
 
     return persistReducer(config, createRootReducer(history));
 };
 
-if (process.env.NODE_ENV === 'development') {
-    const devToolsExtension = window.devToolsExtension;
+let middlewares = [sagaMiddleware, router];
 
-    if (typeof devToolsExtension === 'function') {
-        enhancers.push(devToolsExtension());
-    }
+if (process.env.NODE_ENV === `development`) {
+    const { logger } = require(`redux-logger`);
+    middlewares.push(logger);
 }
+export const store = createStore(createReducer(rootReducer), applyMiddleware(...middlewares));
 
-export const store = createStore(
-    createReducer(createRootReducer),
-    initialState,
-    compose(applyMiddleware(...middleware))
-);
+// SAGAS
+SagaManager.startSagas(sagaMiddleware);
 
 export default () => {
     const persistor = persistStore(store);
