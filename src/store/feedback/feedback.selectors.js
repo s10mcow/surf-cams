@@ -1,5 +1,8 @@
 import isBefore from 'date-fns/isBefore';
-export const getCreateMediaProgress = state => state && state.feedback && state.feedback.createMediaProgress * 100;
+export const getCreateMediaProgress = state => [
+    state && state.feedback && state.feedback.createMediaProgress * 100,
+    state && state.feedback && state.feedback.createMediaWorking,
+];
 
 export const getMediaByName = (state, name) =>
     state &&

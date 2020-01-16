@@ -3,7 +3,7 @@ import TYPES from './feedback.types';
 import api from '../api';
 import Config from '../../config/config';
 import actions from './feedback.actions';
-import { eventChannel } from 'redux-saga';
+import { eventChannel, END } from 'redux-saga';
 import axios from 'axios';
 
 function upload(payload, onProgress) {
@@ -14,6 +14,7 @@ function upload(payload, onProgress) {
     data.append('upload_preset', Config.upload_preset);
     data.append('file', file);
     data.append('tags', tags);
+    data.append('exif', true);
     data.append('context', `photo=${file.name}`);
 
     const config = {
@@ -33,6 +34,10 @@ function progressChannel(payload) {
     const uploadPromise = upload(payload, event => {
         if (event.type === 'progress') {
             emit(event.loaded / event.total);
+        }
+
+        if (event.loaded / event.total === 1) {
+            emit(END);
         }
     });
 
@@ -80,6 +85,7 @@ function* createMedia({ payload }) {
         yield put(actions.createMedia.success());
     } catch (e) {
         console.log(e);
+        yield put(actions.createMedia.failed());
     }
 }
 

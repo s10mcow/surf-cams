@@ -6,11 +6,14 @@ import { FilePicker } from 'react-file-picker';
 import { CircularProgress } from '@material-ui/core';
 import { CameraAlt } from '@material-ui/icons';
 import { Transformation, Video, CloudinaryContext } from 'cloudinary-react';
-
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
 import { useDispatch, useSelector } from 'react-redux';
 import actions from '../store/feedback/feedback.actions';
 import { getCreateMediaProgress, getMediaByName } from '../store/feedback/feedback.selectors';
 import MediaCard from './MediaCard';
+import Slide from '@material-ui/core/Slide';
+
 const Feedback = styled.article`
     display: flex;
     flex-direction: column;
@@ -40,7 +43,7 @@ const UploadingImageWrapper = styled.div`
     display: flex;
     flex: 1;
     position: relative;
-    div:nth-child(2) {
+    .CircularProgress {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -55,18 +58,25 @@ const MediaList = styled.div`
     background: #f5f5f5;
 `;
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
+
 export default ({ toggle, name }) => {
     const [image, setImage] = React.useState(null);
     const dispatch = useDispatch();
-    const createMediaProgress = useSelector(getCreateMediaProgress);
+    const [createMediaProgress, createMediaWorking] = useSelector(getCreateMediaProgress);
     const media = useSelector(state => getMediaByName(state, name));
 
     React.useEffect(() => {
+        console.log('FIRING!!!!!!!!');
         dispatch(actions.fetchAllMedia.trigger());
     }, [dispatch]);
 
     const createMedia = file => {
-        setImage(URL.createObjectURL(file));
+        const mediaUrl = URL.createObjectURL(file);
+        debugger;
+        setImage(mediaUrl);
         dispatch(actions.createMedia.trigger({ file, tags: name }));
     };
 
@@ -123,49 +133,62 @@ export default ({ toggle, name }) => {
     //     };
     //     loadImage(file, convertCanvas, options);
     // };
-    console.log(media);
+
     return (
-        <Feedback className="feedback">
-            <Button color="primary" onClick={toggle}>
-                back to video
-            </Button>
-
-            {image && createMediaProgress < 100 && (
-                <UploadingImageWrapper>
-                    <UploadingImage url={image} />
-                    <CircularProgress variant="determinate" value={createMediaProgress} size={60} />
-                </UploadingImageWrapper>
-            )}
-
-            <MediaList>
-                <CloudinaryContext cloudName="howisthesurf">
-                    {media.map(({ data }) =>
-                        data.resource_type === 'image' ? (
-                            <MediaCard key={data.public_id} data={data} />
-                        ) : (
-                            <Video
-                                key={data.public_id}
-                                controls
-                                publicId={`${data.public_id}.gif`}
-                                resourceType={data.resource_type}
-                            >
-                                <Transformation audioCodec="none" flags="animated" quality="auto" />
-                            </Video>
-                        )
-                    )}
-                </CloudinaryContext>
-            </MediaList>
-
-            <FilePicker
-                maxSize={10}
-                dims={{ minWidth: 100, minHeight: 100 }}
-                onChange={createMedia}
-                onError={errMsg => console.log(errMsg)}
+        <>
+            <Dialog
+                fullScreen
+                aria-labelledby="simple-dialog-title"
+                open={createMediaWorking}
+                TransitionComponent={Transition}
             >
-                <Button variant="fab">
-                    <CameraAlt />
+                <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
+                <UploadingImageWrapper>
+                    {/* <UploadingImage url={image} /> */}
+                    <MediaCard data={{ url: image, tags: ['Uploading...'], created_at: new Date() }} />
+                    <CircularProgress
+                        className="CircularProgress"
+                        variant="determinate"
+                        value={createMediaProgress}
+                        size={60}
+                    />
+                </UploadingImageWrapper>
+            </Dialog>
+            <Feedback className="feedback">
+                <Button color="primary" onClick={toggle}>
+                    back to video
                 </Button>
-            </FilePicker>
-        </Feedback>
+
+                <MediaList>
+                    <CloudinaryContext cloudName="howisthesurf">
+                        {media.map(({ data }) =>
+                            data.resource_type === 'image' ? (
+                                <MediaCard key={data.public_id} data={data} />
+                            ) : (
+                                <Video
+                                    key={data.public_id}
+                                    controls
+                                    publicId={`${data.public_id}.gif`}
+                                    resourceType={data.resource_type}
+                                >
+                                    <Transformation audioCodec="none" flags="animated" quality="auto" />
+                                </Video>
+                            )
+                        )}
+                    </CloudinaryContext>
+                </MediaList>
+
+                <FilePicker
+                    maxSize={10}
+                    dims={{ minWidth: 100, minHeight: 100 }}
+                    onChange={createMedia}
+                    onError={errMsg => console.log(errMsg)}
+                >
+                    <Button variant="fab">
+                        <CameraAlt />
+                    </Button>
+                </FilePicker>
+            </Feedback>
+        </>
     );
 };

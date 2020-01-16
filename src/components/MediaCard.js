@@ -29,8 +29,8 @@ export default function MediaCard({ data }) {
                     <Typography gutterBottom variant="h5" component="h2">
                         {formatDistance(new Date(data.created_at), new Date())} ago
                     </Typography>
-                    {data.tags.map(tag => (
-                        <Typography variant="body2" color="textSecondary" component="p">
+                    {data.tags.map((tag, key) => (
+                        <Typography key={key} variant="body2" color="textSecondary" component="p">
                             {tag}
                         </Typography>
                     ))}
