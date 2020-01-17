@@ -14,18 +14,15 @@ import Feedback from './Feedback';
 const PlayerWrapper = styled.div`
     display: flex;
     position: relative;
-    overflow: hidden;
+
     .player {
         transition: all 0.2s ease-in-out;
+        min-width: 100vw;
         transform: ${props => (props.showFeedback ? 'translateX(1000px)' : 'translateX(0px)')};
     }
     .feedback {
-        display: flex;
-        position: absolute;
         transition: all 0.2s ease-in-out;
         transform: ${props => (props.showFeedback ? 'translateX(0px)' : 'translateX(-1000px)')};
-
-        width: 100%;
     }
 `;
 
@@ -73,6 +70,7 @@ export default class Player extends PureComponent {
     }
 
     componentDidMount() {
+        console.log(this.props);
         this.setupPlayer(this.props.url);
     }
 
@@ -82,7 +80,9 @@ export default class Player extends PureComponent {
         }
     }
 
-    changeCamera = (index, url) => {
+    changeCamera = (index, camera) => {
+        const { url, name } = JSON.parse(camera);
+
         if (url === 'suggest_new_camera') {
             const a = document.createElement('a');
             a.href = 'mailto:powdertothepeeps@gmail.com?subject=New Camera Suggestion';
@@ -91,25 +91,31 @@ export default class Player extends PureComponent {
             return this.props.onClick({
                 index,
                 url: 'https://cams.cdn-surfline.com/cdn-int/pt-arrifana/playlist.m3u8',
+                name: 'Arrifana',
             });
         }
+
         ReactGA.event({
             category: 'Camera Player',
             action: 'Change Camera',
             label: url,
         });
-        this.props.updateCamera({ index, url });
+        this.props.updateCamera({ index, url, name });
     };
 
     render() {
         const footer = (
             <div className="player__footer__uncollapsed">
                 <Select
-                    value={this.props.url}
+                    value={JSON.stringify({ url: this.props.url, name: this.props.name })}
                     onChange={event => this.changeCamera(this.props.index, event.target.value)}
                 >
                     {this.props.beachNames.map((beach, key) => (
-                        <Option key={key} value={beach.url} label={beach.name} />
+                        <Option
+                            key={key}
+                            value={JSON.stringify({ url: beach.url, name: beach.name })}
+                            label={beach.name}
+                        />
                     ))}
                     <Option key="suggest_new_camera" value="suggest_new_camera" label="* Suggest New Camera *" />
                 </Select>

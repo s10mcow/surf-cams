@@ -1,31 +1,23 @@
-import React from "react";
-import Player from "./Player";
-import Button from "muicss/lib/react/button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
+import React from 'react';
+import Player from './Player';
+import Button from 'muicss/lib/react/button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
 
-export default function PlayersContainer({
-    cameras,
-    beachNames,
-    deleteCamera,
-    addNewCamera,
-    updateCamera,
-    showModal
-}) {
-    const players =
-        cameras.length === 1 ? "players players--single" : "players";
+export default function PlayersContainer({ cameras, beachNames, deleteCamera, addNewCamera, updateCamera, showModal }) {
+    const players = cameras.length === 1 ? 'players players--single' : 'players';
     const [open, setOpen] = React.useState(false);
-
+    console.log(cameras);
     const handleClose = () => {
         setOpen(false);
     };
 
     const buyBeer = () => {
-        const a = document.createElement("a");
-        a.href = "https://www.paypal.com/paypalme2/powdertothepeopletv";
-        a.target = "_blank";
+        const a = document.createElement('a');
+        a.href = 'https://www.paypal.com/paypalme2/powdertothepeopletv';
+        a.target = '_blank';
         a.click();
         setOpen(false);
     };
@@ -73,7 +65,7 @@ export default function PlayersContainer({
             </section>
             <Button color="primary" onClick={addNewCamera}>
                 Add Camera
-            </Button>{" "}
+            </Button>{' '}
             <div id="wg_target_div_512670_72189470" />
         </div>
     );

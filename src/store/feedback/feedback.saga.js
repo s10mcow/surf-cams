@@ -14,7 +14,7 @@ function upload(payload, onProgress) {
     data.append('upload_preset', Config.upload_preset);
     data.append('file', file);
     data.append('tags', tags);
-    data.append('exif', true);
+
     data.append('context', `photo=${file.name}`);
 
     const config = {

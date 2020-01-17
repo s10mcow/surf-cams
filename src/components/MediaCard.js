@@ -10,7 +10,6 @@ import { formatDistance } from 'date-fns';
 const useStyles = makeStyles({
     card: {
         flex: 1,
-        margin: 20,
         marginBottom: 50,
     },
     media: {
@@ -26,9 +25,11 @@ export default function MediaCard({ data }) {
             <CardActionArea>
                 <CardMedia className={classes.media} image={data.url} title={data.tags[0]} />
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        {formatDistance(new Date(data.created_at), new Date())} ago
-                    </Typography>
+                    {data.created_at && (
+                        <Typography gutterBottom variant="h5" component="h2">
+                            {formatDistance(new Date(data.created_at), new Date())} ago
+                        </Typography>
+                    )}
                     {data.tags.map((tag, key) => (
                         <Typography key={key} variant="body2" color="textSecondary" component="p">
                             {tag}

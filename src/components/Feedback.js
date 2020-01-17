@@ -17,10 +17,23 @@ import Slide from '@material-ui/core/Slide';
 const Feedback = styled.article`
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 100%;
-    overflow: scroll;
+    width: 100vw;
+    height: 89vh;
+    position: absolute;
+    z-index: 1;
+    background: white;
 
+    .mui-btn {
+        min-height: 40px;
+    }
+    .mui-btn--fab {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        right: 0;
+        bottom: 0;
+    }
     button input {
         display: none;
     }
@@ -30,19 +43,19 @@ export const UploadingImage = styled.div`
     display: flex;
     flex: 1;
     background-image: ${props => `url(${props.url})`};
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: calc(100vw + 100px);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    opacity: 0.7;
-    filter: blur(8px);
+    opacity: 1;
 `;
 
 const UploadingImageWrapper = styled.div`
     display: flex;
     flex: 1;
     position: relative;
+    overflow: hidden;
     .CircularProgress {
         position: absolute;
         top: 50%;
@@ -64,18 +77,17 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default ({ toggle, name }) => {
     const [image, setImage] = React.useState(null);
+    console.log(name);
     const dispatch = useDispatch();
     const [createMediaProgress, createMediaWorking] = useSelector(getCreateMediaProgress);
     const media = useSelector(state => getMediaByName(state, name));
 
     React.useEffect(() => {
-        console.log('FIRING!!!!!!!!');
         dispatch(actions.fetchAllMedia.trigger());
     }, [dispatch]);
 
     const createMedia = file => {
         const mediaUrl = URL.createObjectURL(file);
-        debugger;
         setImage(mediaUrl);
         dispatch(actions.createMedia.trigger({ file, tags: name }));
     };
@@ -142,16 +154,19 @@ export default ({ toggle, name }) => {
                 open={createMediaWorking}
                 TransitionComponent={Transition}
             >
-                <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
                 <UploadingImageWrapper>
-                    {/* <UploadingImage url={image} /> */}
-                    <MediaCard data={{ url: image, tags: ['Uploading...'], created_at: new Date() }} />
-                    <CircularProgress
-                        className="CircularProgress"
-                        variant="determinate"
-                        value={createMediaProgress}
-                        size={60}
-                    />
+                    <UploadingImage url={image} />
+                    {/* <MediaCard data={{ url: image, tags: ['Uploading...'] }} /> */}
+                    {createMediaProgress > 0 && createMediaProgress < 100 ? (
+                        <CircularProgress
+                            className="CircularProgress"
+                            variant="determinate"
+                            value={createMediaProgress}
+                            size={60}
+                        />
+                    ) : (
+                        <CircularProgress size={60} className="CircularProgress" />
+                    )}
                 </UploadingImageWrapper>
             </Dialog>
             <Feedback className="feedback">

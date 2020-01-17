@@ -6,7 +6,7 @@ const cameras = (state = initalState, action) => {
     switch (action.type) {
         case 'SET_NEW_CAMERA':
             const newState = [...state];
-            newState[action.camera.index] = { url: action.camera.url };
+            newState[action.camera.index] = { url: action.camera.url, name: action.camera.name };
             return newState;
         case 'ADD_NEW_CAMERA':
             return [

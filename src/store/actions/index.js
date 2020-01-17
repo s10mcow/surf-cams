@@ -1,28 +1,28 @@
 export const setVisibilityFilter = filter => {
     return {
         type: 'SET_VISIBILITY_FILTER',
-        filter
-    }
+        filter,
+    };
 };
 
-export const setNewCamera = (camera) => {
+export const setNewCamera = camera => {
     return {
         type: 'SET_NEW_CAMERA',
-        camera
-    }
+        camera,
+    };
 };
 
 export const addNewCamera = () => {
     return {
         type: 'ADD_NEW_CAMERA',
-        "url": "https://cams.cdn-surfline.com/cdn-int/pt-arrifana/playlist.m3u8",
-        "name": "Arrifana"
-    }
+        url: 'https://cams.cdn-surfline.com/cdn-int/pt-arrifana/playlist.m3u8',
+        name: 'Arrifana',
+    };
 };
 
-export const deleteCamera = (camera) => {
-   return {
-       type: 'DELETE_CAMERA',
-       camera
-   }
+export const deleteCamera = camera => {
+    return {
+        type: 'DELETE_CAMERA',
+        camera,
+    };
 };

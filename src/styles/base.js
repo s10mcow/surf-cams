@@ -183,7 +183,8 @@ export default css`
         display: flex;
         flex-direction: column;
         padding: 5px;
-        width: 97%;
+        width: calc(100vw - 10px);
+
         & > .mui-btn {
             margin-top: 30px;
         }
