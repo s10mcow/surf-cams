@@ -5,6 +5,7 @@ const initialState = {
     createMediaProgress: 0,
     createMediaWorking: false,
     createMediaFailed: false,
+    selected: '',
 };
 
 const reducer = (state = initialState, action) => {
@@ -38,6 +39,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 allMedia: action.payload,
+            };
+        case TYPES.SET_SELECTED_FEEDBACK:
+            return {
+                ...state,
+                selected: action.payload,
             };
 
         default:

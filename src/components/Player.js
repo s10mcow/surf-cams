@@ -9,7 +9,6 @@ import Select from 'muicss/lib/react/select';
 import Button from 'muicss/lib/react/button';
 
 import ReactGA from 'react-ga';
-import Feedback from './Feedback';
 
 const PlayerWrapper = styled.div`
     display: flex;
@@ -32,7 +31,6 @@ export default class Player extends PureComponent {
         this.state = {
             hls: false,
             showError: false,
-            showFeedback: true,
         };
     }
 
@@ -136,16 +134,15 @@ export default class Player extends PureComponent {
         );
 
         return (
-            <PlayerWrapper showFeedback={this.state.showFeedback}>
+            <PlayerWrapper>
                 <article className="player">
                     {playerContent}
 
                     <footer className="player__footer">{footer}</footer>
-                    <Button color="secondary" onClick={() => this.setState({ showFeedback: true })}>
+                    <Button color="secondary" onClick={() => this.props.showFeedback(this.props.name)}>
                         How was it?
                     </Button>
                 </article>
-                <Feedback name={this.props.name} toggle={() => this.setState({ showFeedback: false })} />
             </PlayerWrapper>
         );
     }

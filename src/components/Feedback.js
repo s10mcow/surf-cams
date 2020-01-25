@@ -17,9 +17,9 @@ import Slide from '@material-ui/core/Slide';
 const Feedback = styled.article`
     display: flex;
     flex-direction: column;
-    width: 100vw;
+    width: 100%;
     height: 89vh;
-    position: absolute;
+
     z-index: 1;
     background: white;
 

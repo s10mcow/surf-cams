@@ -14,3 +14,5 @@ export const getMediaByName = (state, name) =>
             if (!isBefore(a.created_at, b.created_at)) return -1;
             return 0;
         });
+
+export const getSelectedFeedback = state => state && state.feedback && state.feedback.selected;
