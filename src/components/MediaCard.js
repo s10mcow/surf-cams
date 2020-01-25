@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { formatDistance } from 'date-fns';
+import { Image } from 'cloudinary-react';
 
 const useStyles = makeStyles({
     card: {
@@ -13,7 +14,7 @@ const useStyles = makeStyles({
         marginBottom: 50,
     },
     media: {
-        height: 300,
+        width: '100%',
     },
 });
 
@@ -23,7 +24,8 @@ export default function MediaCard({ data }) {
     return (
         <Card className={classes.card}>
             <CardActionArea>
-                <CardMedia className={classes.media} image={data.url} title={data.tags[0]} />
+                <Image className={classes.media} publicId={data.public_id} crop="scale" />
+
                 <CardContent>
                     {data.created_at && (
                         <Typography gutterBottom variant="h5" component="h2">
