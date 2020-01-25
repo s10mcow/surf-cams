@@ -4,7 +4,7 @@ import Button from 'muicss/lib/react/button';
 import ReactGA from 'react-ga';
 import { FilePicker } from 'react-file-picker';
 import { CircularProgress } from '@material-ui/core';
-import { CameraAlt } from '@material-ui/icons';
+import { CameraAlt, ArrowBack } from '@material-ui/icons';
 import { Transformation, Video, CloudinaryContext } from 'cloudinary-react';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
@@ -27,13 +27,15 @@ const Feedback = styled.article`
         min-height: 40px;
     }
     .mui-btn--fab {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
+        position: absolute;
         right: 0;
         bottom: 0;
     }
+
+    .feedback__back {
+        left: 0;
+    }
+
     button input {
         display: none;
     }
@@ -68,7 +70,6 @@ const UploadingImageWrapper = styled.div`
 const MediaList = styled.div`
     display: flex;
     flex-direction: column;
-    background: #f5f5f5;
 `;
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -170,8 +171,8 @@ export default ({ toggle, name }) => {
                 </UploadingImageWrapper>
             </Dialog>
             <Feedback className="feedback">
-                <Button color="primary" onClick={toggle}>
-                    back to video
+                <Button color="primary" className="feedback__back" variant="fab" onClick={toggle}>
+                    <ArrowBack />
                 </Button>
 
                 <MediaList>

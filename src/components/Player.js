@@ -12,17 +12,6 @@ import ReactGA from 'react-ga';
 
 const PlayerWrapper = styled.div`
     display: flex;
-    position: relative;
-
-    .player {
-        transition: all 0.2s ease-in-out;
-        min-width: 100vw;
-        transform: ${props => (props.showFeedback ? 'translateX(1000px)' : 'translateX(0px)')};
-    }
-    .feedback {
-        transition: all 0.2s ease-in-out;
-        transform: ${props => (props.showFeedback ? 'translateX(0px)' : 'translateX(-1000px)')};
-    }
 `;
 
 export default class Player extends PureComponent {
