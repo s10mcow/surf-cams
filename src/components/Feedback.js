@@ -71,6 +71,9 @@ const UploadingImageWrapper = styled.div`
 const MediaList = styled.div`
     display: flex;
     flex-direction: column;
+    margin: 0 auto;
+    max-width: 650px;
+    width: 100%;
 `;
 
 const Transition = React.forwardRef(function Transition(props, ref) {

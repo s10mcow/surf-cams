@@ -14,7 +14,6 @@ function upload(payload, onProgress) {
     data.append('upload_preset', Config.upload_preset);
     data.append('file', file);
     data.append('tags', tags);
-
     data.append('context', `photo=${file.name}`);
 
     const config = {
@@ -62,6 +61,8 @@ function* createCloudinaryMedia({ payload }) {
             resource_type: data.resource_type,
             created_at: data.created_at,
             url: data.url,
+            width: data.width,
+            height: data.height,
         };
         yield call(uploadToFauna, media);
     } catch (e) {

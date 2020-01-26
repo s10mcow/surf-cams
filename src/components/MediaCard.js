@@ -41,20 +41,19 @@ const User = styled.article`
     }
 `;
 
-const useStyles = makeStyles({
-    card: {
-        flex: 1,
+const useStyles = makeStyles(() => ({
+    card: props => ({
         marginBottom: 50,
-        maxWidth: '650px',
-        maxHeight: '800px',
-        paddingBottom: '125%',
+        // maxWidth: '650px',
+        // maxHeight: 300,
+        paddingBottom: `${(props.height / props.width) * 100}%`,
         position: 'relative',
         borderRadius: 0,
-    },
+    }),
     media: {
         position: 'absolute',
         left: 0,
-        top: 65,
+        top: 75,
         width: '100%',
         userSelect: 'none',
         objectFit: 'cover',
@@ -65,10 +64,10 @@ const useStyles = makeStyles({
         alignItems: 'center',
         background: 'white',
     },
-});
+}));
 
 export default function MediaCard({ data }) {
-    const classes = useStyles();
+    const classes = useStyles(data);
 
     return (
         <Card className={classes.card}>
