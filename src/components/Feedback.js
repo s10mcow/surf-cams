@@ -12,15 +12,11 @@ import actions from '../store/feedback/feedback.actions';
 import { getCreateMediaProgress, getMediaByName } from '../store/feedback/feedback.selectors';
 import MediaCard, { NoMediaCard } from './MediaCard';
 import Slide from '@material-ui/core/Slide';
+import { makeStyles } from '@material-ui/core/styles';
 
 const Feedback = styled.article`
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 89vh;
-
-    z-index: 1;
-    background: white;
 
     .mui-btn {
         min-height: 40px;

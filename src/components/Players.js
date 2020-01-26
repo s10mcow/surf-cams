@@ -6,6 +6,14 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Feedback from './Feedback';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+    dialog: {
+        paddingLeft: 0,
+        paddingRight: 0,
+    },
+});
 
 export default function PlayersContainer({ cameras, beachNames, deleteCamera, addNewCamera, updateCamera, showModal }) {
     const players = cameras.length === 1 ? 'players players--single' : 'players';
@@ -33,10 +41,12 @@ export default function PlayersContainer({ cameras, beachNames, deleteCamera, ad
         setOpen(showModal);
     }, [showModal]);
 
+    const classes = useStyles();
+
     return (
         <div className="players__wrapper">
             <Dialog fullScreen open={showFeedback} onClose={() => toggleFeedback(false)}>
-                <DialogContent>
+                <DialogContent className={classes.dialog}>
                     <Feedback name={selectedFeedback} toggle={() => toggleFeedback(false)} />
                 </DialogContent>
             </Dialog>

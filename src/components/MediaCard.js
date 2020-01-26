@@ -23,6 +23,24 @@ export const NoMediaCard = styled.article`
     color: white;
 `;
 
+const User = styled.article`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .User__circle {
+        display: flex;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: coral;
+        margin-right: 10px;
+    }
+    .User__name {
+        font-weight: bold;
+        font-size: 14px;
+    }
+`;
+
 const useStyles = makeStyles({
     card: {
         flex: 1,
@@ -31,14 +49,21 @@ const useStyles = makeStyles({
         maxHeight: '800px',
         paddingBottom: '125%',
         position: 'relative',
+        borderRadius: 0,
     },
     media: {
-        height: '100%',
-        left: 0,
         position: 'absolute',
-        top: 0,
-        userSelect: 'none',
+        left: 0,
+        top: 65,
         width: '100%',
+        userSelect: 'none',
+        objectFit: 'cover',
+    },
+    content: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        background: 'white',
     },
 });
 
@@ -49,17 +74,23 @@ export default function MediaCard({ data }) {
         <Card className={classes.card}>
             <Image className={classes.media} publicId={data.public_id} crop="scale" />
             <CardActionArea>
-                <CardContent>
-                    {data.created_at && (
-                        <Typography gutterBottom variant="h5" component="h2">
-                            {formatDistance(new Date(data.created_at), new Date())} ago
-                        </Typography>
-                    )}
-                    {data.tags.map((tag, key) => (
-                        <Typography key={key} variant="body2" color="textSecondary" component="p">
-                            {tag}
-                        </Typography>
-                    ))}
+                <CardContent className={classes.content}>
+                    <User>
+                        <div className="User__circle" />
+                        <div className="User__name">Sten Muchow</div>
+                    </User>
+                    <div>
+                        {data.created_at && (
+                            <Typography gutterBottom variant="h5" component="h2">
+                                {formatDistance(new Date(data.created_at), new Date())} ago
+                            </Typography>
+                        )}
+                        {data.tags.map((tag, key) => (
+                            <Typography key={key} variant="body2" color="textSecondary" component="p">
+                                {tag}
+                            </Typography>
+                        ))}
+                    </div>
                 </CardContent>
             </CardActionArea>
         </Card>
