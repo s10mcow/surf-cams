@@ -16,7 +16,7 @@ export const addNewCamera = () => {
     return {
         type: 'ADD_NEW_CAMERA',
         url: 'https://cams.cdn-surfline.com/cdn-int/pt-arrifana/playlist.m3u8',
-        name: 'Arrifana',
+        name: 'Arrifana (Surfline)',
     };
 };
 

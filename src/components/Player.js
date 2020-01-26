@@ -10,10 +10,6 @@ import Button from 'muicss/lib/react/button';
 
 import ReactGA from 'react-ga';
 
-const PlayerWrapper = styled.div`
-    display: flex;
-`;
-
 export default class Player extends PureComponent {
     constructor(props) {
         super(props);
@@ -33,9 +29,7 @@ export default class Player extends PureComponent {
                 let beachHls = new Hls();
                 beachHls.loadSource(url);
                 beachHls.attachMedia(this.refs.video);
-                beachHls.on(Hls.Events.MANIFEST_PARSED, () => {
-                    this.refs && this.refs.video && this.refs.video.play();
-                });
+                beachHls.on(Hls.Events.MANIFEST_PARSED, () => this.refs && this.refs.video && this.refs.video.play());
                 beachHls.on(Hls.Events.ERROR, (event, err) => {
                     console.log(err);
                     if (err.response && err.response.code === 404) {
@@ -52,7 +46,7 @@ export default class Player extends PureComponent {
     }
 
     delete() {
-        this.state.hls && this.state.hls.detroy && this.state.hls.destroy();
+        this.state.hls && this.state.hls.destroy && this.state.hls.destroy();
         this.setState({ hls: false }, () => this.props.deleteCamera({ index: this.props.index }));
     }
 
@@ -123,16 +117,14 @@ export default class Player extends PureComponent {
         );
 
         return (
-            <PlayerWrapper>
-                <article className="player">
-                    {playerContent}
+            <article className="player">
+                {playerContent}
 
-                    <footer className="player__footer">{footer}</footer>
-                    <Button color="secondary" onClick={() => this.props.showFeedback(this.props.name)}>
-                        How was it?
-                    </Button>
-                </article>
-            </PlayerWrapper>
+                <footer className="player__footer">{footer}</footer>
+                <Button color="secondary" onClick={() => this.props.showFeedback(this.props.name)}>
+                    How was it?
+                </Button>
+            </article>
         );
     }
 }

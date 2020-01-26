@@ -78,7 +78,7 @@ export default function PlayersContainer({ cameras, beachNames, deleteCamera, ad
             </section>
             <Button color="primary" onClick={addNewCamera}>
                 Add Camera
-            </Button>{' '}
+            </Button>
             <div id="wg_target_div_512670_72189470" />
         </div>
     );

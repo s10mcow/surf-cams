@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from 'muicss/lib/react/button';
-import ReactGA from 'react-ga';
 import { FilePicker } from 'react-file-picker';
 import { CircularProgress } from '@material-ui/core';
 import { CameraAlt, ArrowBack } from '@material-ui/icons';
@@ -11,7 +10,7 @@ import Dialog from '@material-ui/core/Dialog';
 import { useDispatch, useSelector } from 'react-redux';
 import actions from '../store/feedback/feedback.actions';
 import { getCreateMediaProgress, getMediaByName } from '../store/feedback/feedback.selectors';
-import MediaCard from './MediaCard';
+import MediaCard, { NoMediaCard } from './MediaCard';
 import Slide from '@material-ui/core/Slide';
 
 const Feedback = styled.article`
@@ -27,13 +26,19 @@ const Feedback = styled.article`
         min-height: 40px;
     }
     .mui-btn--fab {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         position: absolute;
-        right: 0;
+        right: 5px;
         bottom: 0;
+        svg {
+            font-size: 25px;
+        }
     }
 
     .feedback__back {
-        left: 0;
+        left: 5px;
     }
 
     button input {
@@ -93,60 +98,6 @@ export default ({ toggle, name }) => {
         dispatch(actions.createMedia.trigger({ file, tags: name }));
     };
 
-    // const resizeSvg = file => {
-    //     // create image instance
-    //     const previewUrl = URL.createObjectURL(file);
-
-    //     const img = new Image();
-    //     img.src = previewUrl;
-
-    //     img.onload = () => {
-    //         // dimensions to maintain svg aspect ratio
-    //         const width = 800;
-    //         const scaleFactor = width / img.width;
-    //         const height = img.height * scaleFactor;
-
-    //         // create canvas element
-    //         const canvas = document.createElement("canvas");
-    //         canvas.width = width;
-    //         canvas.height = height;
-
-    //         const ctx = canvas.getContext("2d");
-    //         ctx.drawImage(img, 0, 0, width, height); // draw img to canvas
-
-    //         // use canvas toBlob method to convert svg to png
-    //         ctx.canvas.toBlob(
-    //             blob => {
-    //                 const convertedSvg = new File([blob], `${file.name}.png`, {
-    //                     type: "image/png",
-    //                     lastModified: Date.now()
-    //                 });
-    //                 setImageFromB64(convertedSvg);
-    //             },
-    //             "image/png",
-    //             1
-    //         );
-    //     };
-    // };
-
-    // const parseLoadImage = file => {
-    //     const options = { maxWidth: 800, meta: true };
-    //     const convertCanvas = canvas => {
-    //         canvas.toBlob(
-    //             blob => {
-    //                 const convertedSvg = new File([blob], `${file.name}.png`, {
-    //                     type: "image/png",
-    //                     lastModified: Date.now()
-    //                 });
-    //                 setImageFromB64(convertedSvg);
-    //             },
-    //             "image/png",
-    //             1
-    //         );
-    //     };
-    //     loadImage(file, convertCanvas, options);
-    // };
-
     return (
         <>
             <Dialog
@@ -157,7 +108,6 @@ export default ({ toggle, name }) => {
             >
                 <UploadingImageWrapper>
                     <UploadingImage url={image} />
-                    {/* <MediaCard data={{ url: image, tags: ['Uploading...'] }} /> */}
                     {createMediaProgress > 0 && createMediaProgress < 100 ? (
                         <CircularProgress
                             className="CircularProgress"
@@ -176,22 +126,30 @@ export default ({ toggle, name }) => {
                 </Button>
 
                 <MediaList>
-                    <CloudinaryContext cloudName="howisthesurf">
-                        {media.map(({ data }) =>
-                            data.resource_type === 'image' ? (
-                                <MediaCard key={data.public_id} data={data} />
-                            ) : (
-                                <Video
-                                    key={data.public_id}
-                                    controls
-                                    publicId={`${data.public_id}.gif`}
-                                    resourceType={data.resource_type}
-                                >
-                                    <Transformation audioCodec="none" flags="animated" quality="auto" />
-                                </Video>
-                            )
-                        )}
-                    </CloudinaryContext>
+                    {media && media.length > 0 && (
+                        <CloudinaryContext cloudName="howisthesurf">
+                            {media.map(({ data }) =>
+                                data.resource_type === 'image' ? (
+                                    <MediaCard key={data.public_id} data={data} />
+                                ) : (
+                                    <Video
+                                        key={data.public_id}
+                                        controls
+                                        publicId={`${data.public_id}.gif`}
+                                        resourceType={data.resource_type}
+                                    >
+                                        <Transformation audioCodec="none" flags="animated" quality="auto" />
+                                    </Video>
+                                )
+                            )}
+                        </CloudinaryContext>
+                    )}
+                    {media && media.length === 0 && (
+                        <NoMediaCard>
+                            <p>No images here!</p>
+                            <p>Log in and get some media moving!</p>
+                        </NoMediaCard>
+                    )}
                 </MediaList>
 
                 <FilePicker

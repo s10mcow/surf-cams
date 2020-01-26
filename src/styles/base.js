@@ -85,6 +85,7 @@ export default css`
     .player {
         display: flex;
         flex: 1;
+        min-height: 350px;
         justify-content: center;
         align-items: center;
         flex-direction: column;
@@ -104,7 +105,7 @@ export default css`
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100%;
+            height: 60%;
             margin-top: 20px;
 
             div {
