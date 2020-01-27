@@ -43,9 +43,7 @@ const User = styled.article`
 
 const useStyles = makeStyles(() => ({
     card: props => ({
-        marginBottom: 50,
-        // maxWidth: '650px',
-        // maxHeight: 300,
+        marginBottom: 20,
         paddingBottom: `${(props.height / props.width) * 100}%`,
         position: 'relative',
         borderRadius: 0,
@@ -71,7 +69,7 @@ export default function MediaCard({ data }) {
 
     return (
         <Card className={classes.card}>
-            <Image className={classes.media} publicId={data.public_id} crop="scale" />
+            <Image className={classes.media} publicId={data.public_id} crop="scale" width="700" />
             <CardActionArea>
                 <CardContent className={classes.content}>
                     <User>
