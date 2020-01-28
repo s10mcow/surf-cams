@@ -7,7 +7,7 @@ import { Transformation, Video, CloudinaryContext } from 'cloudinary-react';
 import Dialog from '@material-ui/core/Dialog';
 import { useDispatch, useSelector } from 'react-redux';
 import actions from '../../store/feedback/feedback.actions';
-import { getCreateMediaProgress, getMediaByName } from '../../store/feedback/feedback.selectors';
+import { getCreateMediaProgress, getMediaByName, getFetchingMedia } from '../../store/feedback/feedback.selectors';
 import MediaCard, { NoMediaCard } from '../MediaCard';
 import Slide from '@material-ui/core/Slide';
 import { Feedback, UploadingImage, UploadingImageWrapper, MediaList } from './Components';
@@ -18,10 +18,10 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default ({ toggle, name }) => {
     const [image, setImage] = React.useState(null);
-    console.log(name);
     const dispatch = useDispatch();
     const [createMediaProgress, createMediaWorking] = useSelector(getCreateMediaProgress);
     const media = useSelector(state => getMediaByName(state, name));
+    const isFetchingMedia = useSelector(getFetchingMedia);
 
     React.useEffect(() => {
         dispatch(actions.fetchAllMedia.trigger());
@@ -56,32 +56,36 @@ export default ({ toggle, name }) => {
                 </UploadingImageWrapper>
             </Dialog>
             <Feedback className="feedback">
-                <MediaList>
-                    {media && media.length > 0 && (
-                        <CloudinaryContext cloudName="howisthesurf">
-                            {media.map(({ data }) =>
-                                data.resource_type === 'image' ? (
-                                    <MediaCard key={data.public_id} data={data} />
-                                ) : (
-                                    <Video
-                                        key={data.public_id}
-                                        controls
-                                        publicId={`${data.public_id}.gif`}
-                                        resourceType={data.resource_type}
-                                    >
-                                        <Transformation audioCodec="none" flags="animated" quality="auto" />
-                                    </Video>
-                                )
-                            )}
-                        </CloudinaryContext>
-                    )}
-                    {media && media.length === 0 && (
-                        <NoMediaCard>
-                            <p>No images here!</p>
-                            <p>Log in and get some media moving!</p>
-                        </NoMediaCard>
-                    )}
-                </MediaList>
+                {isFetchingMedia ? (
+                    <CircularProgress size={80} />
+                ) : (
+                    <MediaList>
+                        {media && media.length > 0 && (
+                            <CloudinaryContext cloudName="howisthesurf">
+                                {media.map(({ data }) =>
+                                    data.resource_type === 'image' ? (
+                                        <MediaCard key={data.public_id} data={data} />
+                                    ) : (
+                                        <Video
+                                            key={data.public_id}
+                                            controls
+                                            publicId={`${data.public_id}.gif`}
+                                            resourceType={data.resource_type}
+                                        >
+                                            <Transformation audioCodec="none" flags="animated" quality="auto" />
+                                        </Video>
+                                    )
+                                )}
+                            </CloudinaryContext>
+                        )}
+                        {media && media.length === 0 && (
+                            <NoMediaCard>
+                                <p>No images here!</p>
+                                <p>Log in and get some media moving!</p>
+                            </NoMediaCard>
+                        )}
+                    </MediaList>
+                )}
 
                 <footer className="feedback__footer">
                     <Button className="feedback__back" onClick={toggle}>

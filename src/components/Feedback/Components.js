@@ -4,6 +4,9 @@ export const Feedback = styled.article`
     display: flex;
     flex-direction: column;
     margin-bottom: 30px;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 
     .feedback__back {
         margin-right: auto;

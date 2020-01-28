@@ -6,6 +6,8 @@ const initialState = {
     createMediaWorking: false,
     createMediaFailed: false,
     selected: '',
+    fetchingMedia: false,
+    showFeedback: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -35,15 +37,33 @@ const reducer = (state = initialState, action) => {
                 createMediaProgress: action.payload,
                 createMediaWorking: true,
             };
+        case TYPES.FETCH_ALL_MEDIA_START:
+            return {
+                ...state,
+                fetchingMedia: true,
+                fetchingMediaError: false,
+            };
+        case TYPES.FETCH_ALL_MEDIA_FAILED:
+            return {
+                ...state,
+                fetchingMedia: false,
+                fetchingMediaError: true,
+            };
         case TYPES.SET_ALL_MEDIA:
             return {
                 ...state,
                 allMedia: action.payload,
+                fetchingMedia: false,
             };
         case TYPES.SET_SELECTED_FEEDBACK:
             return {
                 ...state,
                 selected: action.payload,
+            };
+        case TYPES.TOGGLE_FEEDBACK:
+            return {
+                ...state,
+                showFeedback: action.payload,
             };
 
         default:

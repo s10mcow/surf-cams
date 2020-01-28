@@ -98,6 +98,7 @@ function* fetchAllMedia() {
         yield put(actions.fetchAllMedia.success());
     } catch (e) {
         console.log(e);
+        yield put(actions.fetchAllMedia.failed());
     }
 }
 

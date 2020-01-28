@@ -5,25 +5,22 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import Feedback from './Feedback/Feedback';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles({
-    dialog: {
-        paddingLeft: 0,
-        paddingRight: 0,
-    },
-});
+import { useDispatch } from 'react-redux';
+import actions from '../store/feedback/feedback.actions';
+import { useHistory } from 'react-router';
 
 export default function PlayersContainer({ cameras, beachNames, deleteCamera, addNewCamera, updateCamera, showModal }) {
     const players = cameras.length === 1 ? 'players players--single' : 'players';
     const [open, setOpen] = React.useState(false);
-    const [selectedFeedback, setSelectedFeedback] = React.useState('');
-    const [showFeedback, toggleFeedback] = React.useState(false);
+
+    const history = useHistory();
+    const dispatch = useDispatch();
+
+    const setSelectedFeedback = selectedFeedback => dispatch(actions.setSelectedFeedback.trigger(selectedFeedback));
 
     const showFeedbackInPlayer = name => {
         setSelectedFeedback(name);
-        toggleFeedback(true);
+        history.push('/feedback');
     };
     const handleClose = () => {
         setOpen(false);
@@ -41,15 +38,8 @@ export default function PlayersContainer({ cameras, beachNames, deleteCamera, ad
         setOpen(showModal);
     }, [showModal]);
 
-    const classes = useStyles();
-
     return (
         <div className="players__wrapper">
-            <Dialog fullScreen open={showFeedback} onClose={() => toggleFeedback(false)}>
-                <DialogContent className={classes.dialog}>
-                    <Feedback name={selectedFeedback} toggle={() => toggleFeedback(false)} />
-                </DialogContent>
-            </Dialog>
             <Dialog
                 className="players__wrapper__dialog"
                 open={open}
