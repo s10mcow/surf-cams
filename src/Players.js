@@ -1,7 +1,7 @@
-import React from "react";
-import Drawer from "@material-ui/core/Drawer";
-import Layout from "./components/Layout";
-import PlayersContainer from "./containers/PlayersContainer";
+import React from 'react';
+import Drawer from '@material-ui/core/Drawer';
+import Layout from './components/Layout';
+import PlayersContainer from './containers/PlayersContainer';
 
 export default function App() {
     const [isOpen, toggleOpen] = React.useState(false);
@@ -13,7 +13,7 @@ export default function App() {
             </Drawer>
             <Layout>
                 <header className="page__header">
-                    <h1>Portugal Beach Cams</h1>
+                    <h1>howisthe.surf</h1>
                 </header>
 
                 <PlayersContainer />
