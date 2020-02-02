@@ -1,10 +1,11 @@
-import { takeLatest, call, take, put, fork } from 'redux-saga/effects';
+import { takeLatest, call, take, put, fork, select } from 'redux-saga/effects';
 import TYPES from './feedback.types';
 import api from '../api';
 import Config from '../../config/config';
 import actions from './feedback.actions';
 import { eventChannel, END } from 'redux-saga';
 import axios from 'axios';
+import { getUser } from '../user/user.selectors';
 
 function upload(payload, onProgress) {
     const url = `https://api.cloudinary.com/v1_1/${Config.cloud_name}/upload`;
@@ -72,7 +73,8 @@ function* createCloudinaryMedia({ payload }) {
 
 function* uploadToFauna(media) {
     try {
-        yield call(api.createMedia, media);
+        const user = yield select(getUser);
+        yield call(api.createMedia, { ...media, user });
         yield call(fetchAllMedia);
     } catch (e) {
         console.log(e);

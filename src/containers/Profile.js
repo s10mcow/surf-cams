@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import actions from '../store/user/user.actions';
 import { Image } from 'cloudinary-react';
 import { getUser, getImageUploading } from '../store/user/user.selectors';
+import { CircularProgress } from '@material-ui/core';
 
 const Profile = styled.div`
     display: flex;
@@ -43,38 +44,6 @@ export const ProfileIcon = styled.div`
     right: 0px;
 `;
 
-export const spinner = keyframes`
-0% {
-  box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
-}
-5%,
-95% {
-  box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
-}
-10%,
-59% {
-  box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
-}
-20% {
-  box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
-}
-38% {
-  box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
-}
-100% {
-  box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
-}
-`;
-
-export const round = keyframes`
-0% {
-  transform: rotate(0deg);
-}
-100% {
-  transform: rotate(360deg);
-}
-`;
-
 export const SpinnerWrapper = styled.div`
     display: flex;
     justify-content: center;
@@ -85,30 +54,13 @@ export const SpinnerWrapper = styled.div`
     border-radius: 50%;
 `;
 
-export const UploadSpinner = styled.div`
-    color: #ffffff;
-    font-size: 24px;
-    text-indent: -9999em;
-    overflow: hidden;
-    width: 1em;
-    height: 1em;
-    border-radius: 50%;
-    margin: 72px auto;
-    position: relative;
-    transform: translateZ(0);
-    animation: ${spinner} 1.7s infinite ease, ${round} 1.7s infinite ease;
-`;
-
 export default () => {
     const isUploading = useSelector(getImageUploading);
     const imagePicker = React.createRef();
     const user = useSelector(getUser);
-    const [image, setImage] = React.useState(user.image.url);
     const dispatch = useDispatch();
     const openImagePicker = () => imagePicker.current.click();
     const uploadImage = file => {
-        const mediaUrl = URL.createObjectURL(file);
-        setImage(mediaUrl);
         dispatch(actions.updloadUserImage.trigger({ file }));
     };
 
@@ -119,7 +71,7 @@ export default () => {
                 <ProfileHeader>
                     {isUploading ? (
                         <SpinnerWrapper>
-                            <UploadSpinner />
+                            <CircularProgress />
                         </SpinnerWrapper>
                     ) : (
                         <FilePicker
@@ -131,7 +83,7 @@ export default () => {
                             <div ref={imagePicker}>
                                 {user.image.public_id ? (
                                     <ProfileImage>
-                                        <Image publicId={user.image.public_id} crop="scale" width="150" /> />
+                                        <Image publicId={user.image.public_id} crop="scale" width="150" />
                                     </ProfileImage>
                                 ) : (
                                     <Avatar style={{ width: 150, height: 150 }}>

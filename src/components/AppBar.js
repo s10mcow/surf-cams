@@ -66,7 +66,7 @@ export default function MenuAppBar() {
                                     <ListItemIcon>
                                         {user && user.image && user.image.public_id ? (
                                             <Avatar>
-                                                <Image publicId={user.image.public_id} crop="scale" width="50" /> />
+                                                <Image publicId={user.image.public_id} crop="scale" width="50" />
                                             </Avatar>
                                         ) : (
                                             <AccountCircleIcon />
@@ -130,7 +130,7 @@ export default function MenuAppBar() {
                             >
                                 {user && user.image && user.image.public_id ? (
                                     <Avatar>
-                                        <Image publicId={user.image.public_id} crop="scale" width="55" /> />
+                                        <Image publicId={user.image.public_id} crop="scale" width="55" />
                                     </Avatar>
                                 ) : (
                                     <AccountCircleIcon />

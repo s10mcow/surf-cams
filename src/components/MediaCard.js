@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import { formatDistance } from 'date-fns';
 import { Image } from 'cloudinary-react';
 import styled from 'styled-components';
+import { Avatar } from '@material-ui/core';
 
 export const NoMediaCard = styled.article`
     display: flex;
@@ -27,15 +28,9 @@ const User = styled.article`
     display: flex;
     justify-content: center;
     align-items: center;
-    .User__circle {
-        display: flex;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: coral;
-        margin-right: 10px;
-    }
+
     .User__name {
+        margin-left: 10px;
         font-weight: bold;
         font-size: 14px;
     }
@@ -73,8 +68,10 @@ export default function MediaCard({ data }) {
             <CardActionArea>
                 <CardContent className={classes.content}>
                     <User>
-                        <div className="User__circle" />
-                        <div className="User__name">Sten Muchow</div>
+                        <Avatar>
+                            <Image publicId={data.user.image.public_id} crop="scale" width="50" />
+                        </Avatar>
+                        <div className="User__name">{data.user.name}</div>
                     </User>
                     <div>
                         {data.created_at && (
