@@ -7,7 +7,9 @@ import beaches from './reducers/beaches.reducer';
 
 import app from './reducers/app';
 
+import application from './app/app.reducers';
 import feedback from './feedback/feedback.reducer';
+import user from './user/user.reducer';
 
 export default history =>
     combineReducers({
@@ -17,4 +19,6 @@ export default history =>
         app,
         beaches,
         feedback,
+        user,
+        application,
     });

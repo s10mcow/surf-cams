@@ -1,9 +1,8 @@
 import React from 'react';
-
 import { FilePicker } from 'react-file-picker';
 import { CircularProgress, Button } from '@material-ui/core';
 import { CameraAlt, Home } from '@material-ui/icons';
-import { Transformation, Video, CloudinaryContext } from 'cloudinary-react';
+import { Transformation, Video } from 'cloudinary-react';
 import Dialog from '@material-ui/core/Dialog';
 import { useDispatch, useSelector } from 'react-redux';
 import actions from '../../store/feedback/feedback.actions';
@@ -60,24 +59,22 @@ export default ({ toggle, name }) => {
                     <CircularProgress size={80} />
                 ) : (
                     <MediaList>
-                        {media && media.length > 0 && (
-                            <CloudinaryContext cloudName="howisthesurf">
-                                {media.map(({ data }) =>
-                                    data.resource_type === 'image' ? (
-                                        <MediaCard key={data.public_id} data={data} />
-                                    ) : (
-                                        <Video
-                                            key={data.public_id}
-                                            controls
-                                            publicId={`${data.public_id}.gif`}
-                                            resourceType={data.resource_type}
-                                        >
-                                            <Transformation audioCodec="none" flags="animated" quality="auto" />
-                                        </Video>
-                                    )
-                                )}
-                            </CloudinaryContext>
-                        )}
+                        {media &&
+                            media.length > 0 &&
+                            media.map(({ data }) =>
+                                data.resource_type === 'image' ? (
+                                    <MediaCard key={data.public_id} data={data} />
+                                ) : (
+                                    <Video
+                                        key={data.public_id}
+                                        controls
+                                        publicId={`${data.public_id}.gif`}
+                                        resourceType={data.resource_type}
+                                    >
+                                        <Transformation audioCodec="none" flags="animated" quality="auto" />
+                                    </Video>
+                                )
+                            )}
                         {media && media.length === 0 && (
                             <NoMediaCard>
                                 <p>No images here!</p>

@@ -9,20 +9,23 @@ import { ConnectedRouter } from 'connected-react-router';
 import BaseStyles from './base-styles';
 import { BrowserRouter } from 'react-router-dom';
 import ReactGA from 'react-ga';
-import netlifyIdentity from 'netlify-identity-widget';
+import InitializeApplication from './components/InitializeApplication';
+import { CloudinaryContext } from 'cloudinary-react';
 
 ReactGA.initialize('UA-107212380-1');
-
 const { store, persistor } = getStoreAndPersistor();
-netlifyIdentity.init();
+
 const render = Component =>
     ReactDOM.render(
         <Provider store={store}>
             <PersistGate persistor={persistor}>
                 <BaseStyles />
+                <InitializeApplication />
                 <ConnectedRouter history={history}>
                     <BrowserRouter>
-                        <Component />
+                        <CloudinaryContext cloudName="howisthesurf">
+                            <Component />
+                        </CloudinaryContext>
                     </BrowserRouter>
                 </ConnectedRouter>
             </PersistGate>

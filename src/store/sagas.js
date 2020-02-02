@@ -1,7 +1,9 @@
 import { take, fork, cancel } from 'redux-saga/effects';
 import feedbackSaga from './feedback/feedback.saga';
+import appSagas from './app/app.sagas';
+import userSaga from './user/user.saga';
 
-const sagas = [...feedbackSaga];
+const sagas = [...feedbackSaga, ...appSagas, ...userSaga];
 
 export const CANCEL_SAGAS_HMR = 'CANCEL_SAGAS_HMR';
 

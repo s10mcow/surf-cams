@@ -6,22 +6,22 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-
 import Drawer from '@material-ui/core/Drawer';
-
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import netlifyIdentity from 'netlify-identity-widget';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import { useHistory } from 'react-router';
+import { useSelector } from 'react-redux';
+import { getUser } from '../store/user/user.selectors';
+import { Avatar } from '@material-ui/core';
+import { Image } from 'cloudinary-react';
+
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
@@ -47,8 +47,7 @@ export default function MenuAppBar() {
     const classes = useStyles();
     const [isOpen, toggleOpen] = React.useState(false);
     const drawerClasses = useDrawerStyles();
-    const user = netlifyIdentity.currentUser();
-
+    const user = useSelector(getUser);
     const history = useHistory();
 
     return (
@@ -65,9 +64,15 @@ export default function MenuAppBar() {
                             <>
                                 <ListItem button onClick={() => history.push('/profile')}>
                                     <ListItemIcon>
-                                        <AccountCircleIcon />
+                                        {user && user.image && user.image.public_id ? (
+                                            <Avatar>
+                                                <Image publicId={user.image.public_id} crop="scale" width="50" /> />
+                                            </Avatar>
+                                        ) : (
+                                            <AccountCircleIcon />
+                                        )}
                                     </ListItemIcon>
-                                    <ListItemText primary={`Welcome ${user.user_metadata.full_name}!`} />
+                                    <ListItemText primary={`Welcome ${user.name}!`} />
                                 </ListItem>
                                 <Divider />
                             </>
@@ -112,7 +117,7 @@ export default function MenuAppBar() {
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Typography variant="h6" className={classes.title}>
+                        <Typography variant="h6" className={classes.title} onClick={() => history.push('/')}>
                             howisthe.surf
                         </Typography>
                         {user && (
@@ -123,7 +128,13 @@ export default function MenuAppBar() {
                                 onClick={() => history.push('/profile')}
                                 color="inherit"
                             >
-                                <AccountCircle />
+                                {user && user.image && user.image.public_id ? (
+                                    <Avatar>
+                                        <Image publicId={user.image.public_id} crop="scale" width="55" /> />
+                                    </Avatar>
+                                ) : (
+                                    <AccountCircleIcon />
+                                )}
                             </IconButton>
                         )}
                     </Toolbar>
