@@ -26,6 +26,8 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 isUploading: false,
             };
+        case TYPES.LOGOUT:
+            return { ...initialState };
 
         default:
             return state;

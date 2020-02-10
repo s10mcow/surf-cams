@@ -5,7 +5,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
@@ -17,8 +16,10 @@ import netlifyIdentity from 'netlify-identity-widget';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import { useHistory } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { getUser } from '../store/user/user.selectors';
+import userActions from '../store/user/user.actions';
+import appActions from '../store/app/app.actions';
 import { Avatar } from '@material-ui/core';
 import { Image } from 'cloudinary-react';
 
@@ -48,7 +49,18 @@ export default function MenuAppBar() {
     const [isOpen, toggleOpen] = React.useState(false);
     const drawerClasses = useDrawerStyles();
     const user = useSelector(getUser);
+    const isLoggedIn = user && user.name;
     const history = useHistory();
+
+    const dispatch = useDispatch();
+    const logOut = () => {
+        netlifyIdentity.logout();
+        dispatch(userActions.logout.trigger());
+    };
+
+    netlifyIdentity.on('login', () => {
+        dispatch(appActions.initApp.trigger());
+    });
 
     return (
         <>
@@ -60,7 +72,7 @@ export default function MenuAppBar() {
                     onKeyDown={() => toggleOpen(false)}
                 >
                     <List>
-                        {user && (
+                        {isLoggedIn && (
                             <>
                                 <ListItem button onClick={() => history.push('/profile')}>
                                     <ListItemIcon>
@@ -86,15 +98,15 @@ export default function MenuAppBar() {
                     </List>
                     <Divider />
                     <List>
-                        {user && (
-                            <ListItem button onClick={() => netlifyIdentity.logout()}>
+                        {isLoggedIn && (
+                            <ListItem button onClick={logOut}>
                                 <ListItemIcon>
                                     <ExitToAppIcon />
                                 </ListItemIcon>
                                 <ListItemText primary={'Log out'} />
                             </ListItem>
                         )}
-                        {!user && (
+                        {!isLoggedIn && (
                             <ListItem button onClick={() => netlifyIdentity.open()}>
                                 <ListItemIcon>
                                     <AccountCircleIcon />
@@ -120,7 +132,7 @@ export default function MenuAppBar() {
                         <Typography variant="h6" className={classes.title} onClick={() => history.push('/')}>
                             howisthe.surf
                         </Typography>
-                        {user && (
+                        {isLoggedIn && (
                             <IconButton
                                 aria-label="account of current user"
                                 aria-controls="menu-appbar"
