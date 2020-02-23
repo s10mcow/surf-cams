@@ -61,7 +61,7 @@ const useStyles = makeStyles(() => ({
 
 export default function MediaCard({ data }) {
     const classes = useStyles(data);
-
+    const userPublicId = data && data.user && data.user.image && data.user.image.public_id;
     return (
         <Card className={classes.card}>
             <Image className={classes.media} publicId={data.public_id} crop="scale" width="700" />
@@ -69,7 +69,7 @@ export default function MediaCard({ data }) {
                 <CardContent className={classes.content}>
                     <User>
                         <Avatar>
-                            <Image publicId={data.user.image.public_id} crop="scale" width="50" />
+                            <Image publicId={userPublicId} crop="scale" width="50" />
                         </Avatar>
                         <div className="User__name">{data.user.name}</div>
                     </User>

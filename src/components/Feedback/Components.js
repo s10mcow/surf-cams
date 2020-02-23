@@ -28,12 +28,12 @@ export const Feedback = styled.article`
         bottom: 0;
         left: 0;
         right: 0;
-        max-height: 40px;
-        height: 40px;
+        max-height: 60px;
+        height: 60px;
         background: #232b2b;
 
         svg {
-            font-size: 25px;
+            font-size: 35px;
             fill: white;
         }
     }

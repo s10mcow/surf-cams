@@ -10,6 +10,7 @@ import { getCreateMediaProgress, getMediaByName, getFetchingMedia } from '../../
 import MediaCard, { NoMediaCard } from '../MediaCard';
 import Slide from '@material-ui/core/Slide';
 import { Feedback, UploadingImage, UploadingImageWrapper, MediaList } from './Components';
+import { getUser } from '../../store/user/user.selectors';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -21,6 +22,8 @@ export default ({ toggle, name }) => {
     const [createMediaProgress, createMediaWorking] = useSelector(getCreateMediaProgress);
     const media = useSelector(state => getMediaByName(state, name));
     const isFetchingMedia = useSelector(getFetchingMedia);
+    const user = useSelector(getUser);
+    const isLoggedIn = user && user.name;
 
     React.useEffect(() => {
         dispatch(actions.fetchAllMedia.trigger());
@@ -88,16 +91,18 @@ export default ({ toggle, name }) => {
                     <Button className="feedback__back" onClick={toggle}>
                         <Home color="white" />
                     </Button>
-                    <FilePicker
-                        maxSize={10}
-                        dims={{ minWidth: 100, minHeight: 100 }}
-                        onChange={createMedia}
-                        onError={errMsg => console.log(errMsg)}
-                    >
-                        <Button className="feeback__camera">
-                            <CameraAlt />
-                        </Button>
-                    </FilePicker>
+                    {isLoggedIn && (
+                        <FilePicker
+                            maxSize={10}
+                            dims={{ minWidth: 100, minHeight: 100 }}
+                            onChange={createMedia}
+                            onError={errMsg => console.log(errMsg)}
+                        >
+                            <Button className="feeback__camera">
+                                <CameraAlt />
+                            </Button>
+                        </FilePicker>
+                    )}
                 </footer>
             </Feedback>
         </>

@@ -74,6 +74,7 @@ function* createCloudinaryMedia({ payload }) {
 function* uploadToFauna(media) {
     try {
         const user = yield select(getUser);
+        debugger;
         yield call(api.createMedia, { ...media, user });
         yield call(fetchAllMedia);
     } catch (e) {
