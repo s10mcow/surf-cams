@@ -8,6 +8,13 @@ import { formatDistance } from 'date-fns';
 import { Image } from 'cloudinary-react';
 import styled from 'styled-components';
 import { Avatar } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import Share from '@material-ui/icons/Share';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+
+import Dialog from '@material-ui/core/Dialog';
+import MuiDialogContent from '@material-ui/core/DialogContent';
+import Button from '@material-ui/core/Button';
 
 export const NoMediaCard = styled.article`
     display: flex;
@@ -57,36 +64,63 @@ const useStyles = makeStyles(() => ({
         alignItems: 'center',
         background: 'white',
     },
+    share: {
+        position: 'absolute',
+        bottom: 0,
+        right: 0,
+        zIndex: 1,
+    },
 }));
 
 export default function MediaCard({ data }) {
     const classes = useStyles(data);
     const userPublicId = data && data.user && data.user.image && data.user.image.public_id;
+    const [isCopied, setCopied] = React.useState(false);
+
     return (
-        <Card className={classes.card}>
-            <Image className={classes.media} publicId={data.public_id} crop="scale" width="700" />
-            <CardActionArea>
-                <CardContent className={classes.content}>
-                    <User>
-                        <Avatar>
-                            <Image publicId={userPublicId} crop="scale" width="50" />
-                        </Avatar>
-                        <div className="User__name">{data.user.name}</div>
-                    </User>
-                    <div>
-                        {data.created_at && (
-                            <Typography gutterBottom variant="h5" component="h2">
-                                {formatDistance(new Date(data.created_at), new Date())} ago
-                            </Typography>
-                        )}
-                        {data.tags.map((tag, key) => (
-                            <Typography key={key} variant="body2" color="textSecondary" component="p">
-                                {tag}
-                            </Typography>
-                        ))}
-                    </div>
-                </CardContent>
-            </CardActionArea>
-        </Card>
+        <>
+            <Dialog onClose={() => setCopied(false)} aria-labelledby="customized-dialog-title" open={isCopied}>
+                <MuiDialogContent dividers>
+                    <Typography gutterBottom>Here is the url to share the image</Typography>
+                    <Typography gutterBottom>{`http://localhost:8888/feedback/${data.public_id}`}</Typography>
+                </MuiDialogContent>
+                <MuiDialogContent>
+                    <CopyToClipboard text={`http://localhost:8888/feedback/${data.public_id}`}>
+                        <Button autoFocus onClick={() => setCopied(false)} color="primary">
+                            Copy Link
+                        </Button>
+                    </CopyToClipboard>
+                </MuiDialogContent>
+            </Dialog>
+            <Card className={classes.card}>
+                <IconButton aria-label="share" className={classes.share} onClick={() => setCopied(true)}>
+                    <Share style={{ color: 'white' }} fontSize="large" />
+                </IconButton>
+
+                <Image className={classes.media} publicId={data.public_id} crop="scale" width="700" />
+                <CardActionArea>
+                    <CardContent className={classes.content}>
+                        <User>
+                            <Avatar>
+                                <Image publicId={userPublicId} crop="scale" width="50" />
+                            </Avatar>
+                            <div className="User__name">{data.user.name}</div>
+                        </User>
+                        <div>
+                            {data.created_at && (
+                                <Typography gutterBottom variant="h5" component="h2">
+                                    {formatDistance(new Date(data.created_at), new Date())} ago
+                                </Typography>
+                            )}
+                            {data.tags.map((tag, key) => (
+                                <Typography key={key} variant="body2" color="textSecondary" component="p">
+                                    {tag}
+                                </Typography>
+                            ))}
+                        </div>
+                    </CardContent>
+                </CardActionArea>
+            </Card>
+        </>
     );
 }

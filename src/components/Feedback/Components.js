@@ -31,6 +31,7 @@ export const Feedback = styled.article`
         max-height: 60px;
         height: 60px;
         background: #232b2b;
+        z-index: 2;
 
         svg {
             font-size: 35px;
