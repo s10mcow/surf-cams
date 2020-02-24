@@ -82,7 +82,7 @@ export default function MediaCard({ data }) {
             <Dialog onClose={() => setCopied(false)} aria-labelledby="customized-dialog-title" open={isCopied}>
                 <MuiDialogContent dividers>
                     <TextField
-                        style={{ width: 300 }}
+                        style={{ width: 290 }}
                         value={`https://howisthe.surf/feedback/${data.public_id}`}
                         variant="outlined"
                     />
