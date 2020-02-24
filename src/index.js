@@ -12,7 +12,7 @@ import ReactGA from 'react-ga';
 import InitializeApplication from './components/InitializeApplication';
 import { CloudinaryContext } from 'cloudinary-react';
 
-ReactGA.initialize('UA-107212380-1');
+ReactGA.initialize('UA-159004221-1');
 const { store, persistor } = getStoreAndPersistor();
 
 const render = Component =>

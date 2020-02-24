@@ -22,16 +22,21 @@ import userActions from '../store/user/user.actions';
 import appActions from '../store/app/app.actions';
 import { Avatar } from '@material-ui/core';
 import { Image } from 'cloudinary-react';
-
+import lightblue from '@material-ui/core/colors/lightBlue';
+import { CameraAlt } from '@material-ui/icons';
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
+    },
+    header: {
+        backgroundColor: lightblue[700],
     },
     menuButton: {
         marginRight: theme.spacing(2),
     },
     title: {
         flexGrow: 1,
+        fontFamily: 'Lacquer !important',
     },
 }));
 
@@ -95,6 +100,12 @@ export default function MenuAppBar() {
                             </ListItemIcon>
                             <ListItemText primary={'Media Feed'} />
                         </ListItem>
+                        <ListItem button onClick={() => history.push('/')}>
+                            <ListItemIcon>
+                                <CameraAlt />
+                            </ListItemIcon>
+                            <ListItemText primary={'Cameras'} />
+                        </ListItem>
                     </List>
                     <Divider />
                     <List>
@@ -118,7 +129,7 @@ export default function MenuAppBar() {
                 </div>
             </Drawer>
             <div className={classes.root}>
-                <AppBar position="static">
+                <AppBar position="static" className={classes.header}>
                     <Toolbar>
                         <IconButton
                             edge="start"

@@ -50,16 +50,15 @@ export default ({ toggle, name }) => {
                             className="CircularProgress"
                             variant="determinate"
                             value={createMediaProgress}
-                            size={60}
                         />
                     ) : (
-                        <CircularProgress size={60} className="CircularProgress" />
+                        <CircularProgress className="CircularProgress" />
                     )}
                 </UploadingImageWrapper>
             </Dialog>
             <Feedback className="feedback">
                 {isFetchingMedia ? (
-                    <CircularProgress size={80} />
+                    <CircularProgress />
                 ) : (
                     <MediaList>
                         {media &&

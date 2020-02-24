@@ -11,7 +11,7 @@ import { Avatar } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import Share from '@material-ui/icons/Share';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-
+import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import Button from '@material-ui/core/Button';
@@ -81,17 +81,21 @@ export default function MediaCard({ data }) {
         <>
             <Dialog onClose={() => setCopied(false)} aria-labelledby="customized-dialog-title" open={isCopied}>
                 <MuiDialogContent dividers>
-                    <Typography gutterBottom>Here is the url to share the image</Typography>
-                    <Typography gutterBottom>{`http://localhost:8888/feedback/${data.public_id}`}</Typography>
+                    <TextField
+                        style={{ width: 300 }}
+                        value={`https://howisthe.surf/feedback/${data.public_id}`}
+                        variant="outlined"
+                    />
                 </MuiDialogContent>
                 <MuiDialogContent>
-                    <CopyToClipboard text={`http://localhost:8888/feedback/${data.public_id}`}>
+                    <CopyToClipboard text={`https://howisthe.surf/feedback/${data.public_id}`}>
                         <Button autoFocus onClick={() => setCopied(false)} color="primary">
                             Copy Link
                         </Button>
                     </CopyToClipboard>
                 </MuiDialogContent>
             </Dialog>
+
             <Card className={classes.card}>
                 <IconButton aria-label="share" className={classes.share} onClick={() => setCopied(true)}>
                     <Share style={{ color: 'white' }} fontSize="large" />
