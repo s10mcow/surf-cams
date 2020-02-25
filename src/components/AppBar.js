@@ -24,6 +24,17 @@ import { Avatar } from '@material-ui/core';
 import { Image } from 'cloudinary-react';
 import lightblue from '@material-ui/core/colors/lightBlue';
 import { CameraAlt } from '@material-ui/icons';
+import styled from 'styled-components';
+import logo from '../logo.png';
+
+const Logo = styled.div`
+    background-image: url(${logo});
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 40px;
+    width: 40px;
+`;
+
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
@@ -32,7 +43,7 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: lightblue[700],
     },
     menuButton: {
-        marginRight: theme.spacing(2),
+        marginRight: 'auto',
     },
     title: {
         flexGrow: 1,
@@ -138,11 +149,9 @@ export default function MenuAppBar() {
                             aria-label="menu"
                             onClick={() => toggleOpen(!isOpen)}
                         >
-                            <MenuIcon />
+                            <Logo className={classes.title} />
                         </IconButton>
-                        <Typography variant="h6" className={classes.title} onClick={() => history.push('/')}>
-                            howisthe.surf
-                        </Typography>
+
                         {isLoggedIn && (
                             <IconButton
                                 aria-label="account of current user"
