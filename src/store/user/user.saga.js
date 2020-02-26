@@ -7,6 +7,48 @@ import { eventChannel, END } from 'redux-saga';
 import axios from 'axios';
 import netlifyIdentity from 'netlify-identity-widget';
 
+function createLoginChannel() {
+    return eventChannel(emit => {
+        const loginHandler = event => {
+            console.log(event);
+            emit(event);
+        };
+
+        netlifyIdentity.on('login', loginHandler);
+
+        // the subscriber must return an unsubscribe function
+        // this will be invoked when the saga calls `channel.close` method
+        const unsubscribe = () => {};
+
+        return unsubscribe;
+    });
+}
+
+export function* watchOnLogin() {
+    const loginChannel = yield call(createLoginChannel);
+
+    while (true) {
+        try {
+            const user = yield take(loginChannel);
+            if (user) {
+                const fauanaUser = yield api.readUser(user.id);
+                if (fauanaUser && fauanaUser.data) {
+                    yield put(actions.setUser.trigger(fauanaUser.data));
+                } else {
+                    const createdUser = yield call(api.createUser, {
+                        image: {},
+                        name: user.user_metadata.full_name,
+                        id: user.id,
+                    });
+                    yield put(actions.setUser.trigger(createdUser.data.user));
+                }
+            }
+        } catch (err) {
+            console.error('socket error:', err);
+        }
+    }
+}
+
 function upload(payload, onProgress) {
     const url = `https://api.cloudinary.com/v1_1/${Config.cloud_name}/upload`;
     const { file } = payload;

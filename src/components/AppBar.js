@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import List from '@material-ui/core/List';
@@ -74,13 +73,17 @@ export default function MenuAppBar() {
         dispatch(userActions.logout.trigger());
     };
 
-    netlifyIdentity.on('login', () => {
-        dispatch(appActions.initApp.trigger());
-    });
+    const login = () => {
+        netlifyIdentity.open('login');
+    };
+
+    // netlifyIdentity.on('login', () => {
+    //     dispatch(appActions.initApp.trigger());
+    // });
 
     return (
         <>
-            <Drawer open={isOpen} onClose={() => toggleOpen(!isOpen)}>
+            <Drawer open={isOpen} onClose={() => toggleOpen(!isOpen)} anchor="right">
                 <div
                     className={drawerClasses.list}
                     role="presentation"
@@ -104,6 +107,14 @@ export default function MenuAppBar() {
                                 </ListItem>
                                 <Divider />
                             </>
+                        )}
+                        {isLoggedIn && (
+                            <ListItem button onClick={() => history.push('/profile')}>
+                                <ListItemIcon>
+                                    <PhotoLibraryIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={'Profile'} />
+                            </ListItem>
                         )}
                         <ListItem button onClick={() => history.push('/feedback')}>
                             <ListItemIcon>
@@ -129,7 +140,7 @@ export default function MenuAppBar() {
                             </ListItem>
                         )}
                         {!isLoggedIn && (
-                            <ListItem button onClick={() => netlifyIdentity.open()}>
+                            <ListItem button onClick={login}>
                                 <ListItemIcon>
                                     <AccountCircleIcon />
                                 </ListItemIcon>
@@ -147,17 +158,17 @@ export default function MenuAppBar() {
                             className={classes.menuButton}
                             color="inherit"
                             aria-label="menu"
-                            onClick={() => toggleOpen(!isOpen)}
+                            onClick={() => history.push('/')}
                         >
                             <Logo className={classes.title} />
                         </IconButton>
 
-                        {isLoggedIn && (
+                        {isLoggedIn ? (
                             <IconButton
                                 aria-label="account of current user"
                                 aria-controls="menu-appbar"
                                 aria-haspopup="true"
-                                onClick={() => history.push('/profile')}
+                                onClick={() => toggleOpen(!isOpen)}
                                 color="inherit"
                             >
                                 {user && user.image && user.image.public_id ? (
@@ -167,6 +178,16 @@ export default function MenuAppBar() {
                                 ) : (
                                     <AccountCircleIcon />
                                 )}
+                            </IconButton>
+                        ) : (
+                            <IconButton
+                                aria-label="menu"
+                                aria-controls="menu-appbar"
+                                aria-haspopup="true"
+                                onClick={() => toggleOpen(!isOpen)}
+                                color="inherit"
+                            >
+                                <MenuIcon />
                             </IconButton>
                         )}
                     </Toolbar>
