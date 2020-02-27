@@ -23,7 +23,7 @@ export default ({ toggle, name }) => {
     const media = useSelector(state => getMediaByName(state, name));
     const isFetchingMedia = useSelector(getFetchingMedia);
     const user = useSelector(getUser);
-    const isLoggedIn = user && user.name;
+    const isLoggedIn = user && user.id;
 
     React.useEffect(() => {
         dispatch(actions.fetchAllMedia.trigger());

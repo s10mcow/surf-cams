@@ -64,10 +64,11 @@ export default function MenuAppBar() {
     const [isOpen, toggleOpen] = React.useState(false);
     const drawerClasses = useDrawerStyles();
     const user = useSelector(getUser);
-    const isLoggedIn = user && user.name;
+    const isLoggedIn = user && user.id;
     const history = useHistory();
 
     const dispatch = useDispatch();
+
     const logOut = () => {
         netlifyIdentity.logout();
         dispatch(userActions.logout.trigger());
@@ -76,10 +77,6 @@ export default function MenuAppBar() {
     const login = () => {
         netlifyIdentity.open('login');
     };
-
-    // netlifyIdentity.on('login', () => {
-    //     dispatch(appActions.initApp.trigger());
-    // });
 
     return (
         <>
