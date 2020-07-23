@@ -2,6 +2,10 @@
     "title": "Portugal Beach Cams",
     "beaches": [
         {
+            "name": "Monte Clerigo",
+            "url": "https://59775c8bd0cf7.streamlock.net/live/sargo.stream/playlist.m3u8"
+        },
+        {
             "name": "Foz do Lizandro",
             "url": "https://video-auth1.iol.pt/beachcam/fozdolizandro/playlist.m3u8"
         },
