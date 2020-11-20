@@ -160,7 +160,7 @@ export default function MenuAppBar() {
                             <Logo className={classes.title} />
                         </IconButton>
 
-                        {isLoggedIn ? (
+                        {/* {isLoggedIn ? (
                             <IconButton
                                 aria-label="account of current user"
                                 aria-controls="menu-appbar"
@@ -186,7 +186,7 @@ export default function MenuAppBar() {
                             >
                                 <MenuIcon />
                             </IconButton>
-                        )}
+                        )} */}
                     </Toolbar>
                 </AppBar>
             </div>

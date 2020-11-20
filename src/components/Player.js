@@ -121,9 +121,9 @@ export default class Player extends PureComponent {
                 {playerContent}
 
                 <footer className="player__footer">{footer}</footer>
-                <Button color="secondary" onClick={() => this.props.showFeedback(this.props.name)}>
+                {/* <Button color="secondary" onClick={() => this.props.showFeedback(this.props.name)}>
                     How was it?
-                </Button>
+                </Button> */}
             </article>
         );
     }
