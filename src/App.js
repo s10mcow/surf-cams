@@ -4,6 +4,7 @@ import PlayersContainer from './containers/PlayersContainer';
 
 export default class App extends Component {
     render() {
+        window.location.href = 'https://howisthe.surf';
         return (
             <Layout>
                 <header className="page__header">
