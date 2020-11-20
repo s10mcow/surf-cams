@@ -8,23 +8,23 @@ import netlifyIdentity from 'netlify-identity-widget';
 
 function* initApp() {
     try {
-        yield call(netlifyIdentity.init);
-        yield fork(watchOnLogin);
-        const user = yield call(netlifyIdentity.currentUser);
-        console.log('Netlify user found', user);
-        if (user) {
-            const fauanaUser = yield api.readUser(user.id);
-            if (fauanaUser && fauanaUser.data) {
-                yield put(userActions.setUser.trigger(fauanaUser.data));
-            } else {
-                const createdUser = yield call(api.createUser, {
-                    image: {},
-                    name: user.user_metadata.full_name,
-                    id: user.id,
-                });
-                yield put(userActions.setUser.trigger(createdUser.data.user));
-            }
-        }
+        // yield call(netlifyIdentity.init);
+        // yield fork(watchOnLogin);
+        // const user = yield call(netlifyIdentity.currentUser);
+        // console.log('Netlify user found', user);
+        // if (user) {
+        //     const fauanaUser = yield api.readUser(user.id);
+        //     if (fauanaUser && fauanaUser.data) {
+        //         yield put(userActions.setUser.trigger(fauanaUser.data));
+        //     } else {
+        //         const createdUser = yield call(api.createUser, {
+        //             image: {},
+        //             name: user.user_metadata.full_name,
+        //             id: user.id,
+        //         });
+        //         yield put(userActions.setUser.trigger(createdUser.data.user));
+        //     }
+        // }
 
         yield put(actions.userInitialized.trigger(true));
     } catch (e) {
