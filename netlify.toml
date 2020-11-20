@@ -1,1 +1,5 @@
-/ https://howisthe.surf
+[[redirects]]
+  from = "/"
+  to = "https://howisthe.surf"
+  status = 301
+  force = true
