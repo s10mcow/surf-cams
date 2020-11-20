@@ -6,6 +6,6 @@ export default () => {
     const dispatch = useDispatch();
     React.useEffect(() => {
         dispatch(actions.initApp.trigger());
-    }, []);
+    }, [dispatch]);
     return null;
 };

@@ -1,13 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { useHistory, useParams } from 'react-router';
+import {  useParams } from 'react-router';
 import { Image } from 'cloudinary-react';
 import Card from '@material-ui/core/Card';
-import { MediaList, Feedback } from '../components/Feedback/Components';
 import styled from 'styled-components';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import Appbar from '../components/AppBar';
 const useStyles = makeStyles(() => ({
     card: {

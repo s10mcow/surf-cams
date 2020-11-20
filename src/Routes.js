@@ -1,6 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { withRouter, Redirect, Switch, useHistory } from 'react-router';
+import { Switch } from 'react-router';
 import { Route } from 'react-router-dom';
 import Players from './Players';
 import { IdentityContextProvider } from 'react-netlify-identity';

@@ -1,6 +1,6 @@
 import React from 'react';
 import AppBar from '../components/AppBar';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { FilePicker } from 'react-file-picker';
 import Camera from '@material-ui/icons/CameraAlt';
 import Avatar from '@material-ui/core/Avatar';
