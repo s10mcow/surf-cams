@@ -34,6 +34,12 @@ const Logo = styled.div`
     width: 40px;
 `;
 
+const LogoText = styled.div`
+    margin-right: 100%;
+    font-family: 'Alfa Slab One', cursive;
+    cursor: pointer;
+`;
+
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
@@ -158,8 +164,9 @@ export default function MenuAppBar() {
                             onClick={() => history.push('/')}
                         >
                             <Logo className={classes.title} />
-                        </IconButton>
 
+                        </IconButton>
+                        <LogoText onClick={() => history.push('/')}>howisthe.surf</LogoText>
                         {/* {isLoggedIn ? (
                             <IconButton
                                 aria-label="account of current user"

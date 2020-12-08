@@ -2,6 +2,7 @@ import { css } from 'styled-components';
 
 export default css`
     @import url('https://fonts.googleapis.com/css?family=Lacquer&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
 
     html {
         overflow-x: hidden;
