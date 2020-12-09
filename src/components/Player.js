@@ -1,13 +1,20 @@
 import React, { PureComponent } from 'react';
 import Hls from 'hls.js';
-
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
-
-import Option from 'muicss/lib/react/option';
-import Select from 'muicss/lib/react/select';
-import Button from 'muicss/lib/react/button';
-
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import Fab from '@material-ui/core/Fab'
+import CloseIcon from '@material-ui/icons/Close'
 import ReactGA from 'react-ga';
+
+const StyledMenuItem = styled(MenuItem)`
+    &.MuiMenuItem-root {
+        font-size: 20px;
+    }
+`
 
 export default class Player extends PureComponent {
     constructor(props) {
@@ -91,13 +98,14 @@ export default class Player extends PureComponent {
                     onChange={event => this.changeCamera(this.props.index, event.target.value)}
                 >
                     {this.props.beachNames.map((beach, key) => (
-                        <Option
+                        <StyledMenuItem
+
                             key={key}
                             value={JSON.stringify({ url: beach.url, name: beach.name })}
-                            label={beach.name}
-                        />
+
+                    >{beach.name}</StyledMenuItem>
                     ))}
-                    <Option key="suggest_new_camera" value="suggest_new_camera" label="* Suggest New Camera *" />
+                    <StyledMenuItem key="suggest_new_camera" value="suggest_new_camera">* Suggest New Camera *</StyledMenuItem>
                 </Select>
             </div>
         );
@@ -108,22 +116,22 @@ export default class Player extends PureComponent {
             </main>
         ) : (
             <main className="player__content">
-                <Button className="player__delete" variant="fab" color="danger" onClick={() => this.delete()}>
-                    &times;
-                </Button>
+                <Fab className="player__delete" color="secondary" aria-label="remove" onClick={() => this.delete()}>
+                    <CloseIcon/>
+                </Fab>
                 <video ref="video" autoPlay controls />
             </main>
         );
 
         return (
-            <article className="player">
+            <Card className="player">
                 {playerContent}
 
-                <footer className="player__footer">{footer}</footer>
+                <CardActions className="player__footer">{footer}</CardActions>
                 {/* <Button color="secondary" onClick={() => this.props.showFeedback(this.props.name)}>
                     How was it?
                 </Button> */}
-            </article>
+            </Card>
         );
     }
 }

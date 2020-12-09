@@ -1,4 +1,5 @@
 import { css } from 'styled-components';
+import lightblue from '@material-ui/core/colors/lightBlue';
 
 export default css`
     @import url('https://fonts.googleapis.com/css?family=Lacquer&display=swap');
@@ -88,7 +89,6 @@ export default css`
     .player {
         display: flex;
         flex: 1;
-        min-height: 350px;
         justify-content: center;
         align-items: center;
         flex-direction: column;
@@ -108,8 +108,9 @@ export default css`
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 60%;
-            margin-top: 20px;
+            height: 100%;
+            width: 100%;
+            background: #f5f5f5;
 
             div {
                 display: flex;
@@ -155,6 +156,11 @@ export default css`
                 .mui-btn:hover {
                     background-color: transparent;
                 }
+                .MuiInput-root {
+                    min-width: 100%;
+                    font-size: 20px;
+                }
+
             }
 
             .mui-select {
@@ -172,9 +178,10 @@ export default css`
         &__delete {
             transform: translateX(100%);
             opacity: 0;
-            position: absolute;
+            position: absolute !important;
             top: 0;
             right: 0;
+            z-index: 11;
         }
 
         h2 {
@@ -188,6 +195,7 @@ export default css`
         flex-direction: column;
         padding: 5px;
         width: calc(100vw - 10px);
+        background: #f5f5f5;
 
         & > .mui-btn {
             margin-top: 30px;
