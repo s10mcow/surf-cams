@@ -1,5 +1,4 @@
 import { css } from 'styled-components';
-import lightblue from '@material-ui/core/colors/lightBlue';
 
 export default css`
     @import url('https://fonts.googleapis.com/css?family=Lacquer&display=swap');
