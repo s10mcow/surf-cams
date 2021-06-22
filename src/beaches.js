@@ -14,6 +14,10 @@ export default {
         title: 'Portugal Beach Cams',
         beaches: [
             {
+                name: 'Praia do Peneco',
+                url: 'https://video-auth1.iol.pt/beachcam/praiadopeneco/playlist.m3u8'
+            },
+            {
                 name: 'Monte Clerigo',
                 url: 'https://video-auth1.iol.pt/beachcam/bcmonteclerigo/playlist.m3u8'
             },
