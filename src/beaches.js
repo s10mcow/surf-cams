@@ -14,6 +14,10 @@ export default {
         title: 'Portugal Beach Cams',
         beaches: [
             {
+                name: 'Monte Clerigo',
+                url: 'https://video-auth1.iol.pt/beachcam/bcmonteclerigo/playlist.m3u8'
+            },
+            {
                 name: 'Senhora da Rocha e Praia Nova',
                 url: 'https://video-auth1.iol.pt/beachcam/bcigreja/playlist.m3u8',
             },
