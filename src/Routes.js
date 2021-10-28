@@ -16,6 +16,7 @@ export default function Routes() {
                 <Route exact path="/profile" component={Profile} />
                 <Route exact path="/feedback" component={Feedback} />
                 <Route exact path="/feedback/:publicId" component={FeedbackImage} />
+
             </Switch>
         </IdentityContextProvider>
     );

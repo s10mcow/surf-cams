@@ -1,100 +1,103 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-// import MenuIcon from '@material-ui/icons/Menu';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Drawer from '@material-ui/core/Drawer';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import netlifyIdentity from 'netlify-identity-widget';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
-import { useHistory } from 'react-router';
-import { useSelector, useDispatch } from 'react-redux';
-import { getUser } from '../store/user/user.selectors';
-import userActions from '../store/user/user.actions';
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import IconButton from '@material-ui/core/IconButton'
+import MenuIcon from '@material-ui/icons/Menu'
+import List from '@material-ui/core/List'
+import Divider from '@material-ui/core/Divider'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import Drawer from '@material-ui/core/Drawer'
+// import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+// import netlifyIdentity from 'netlify-identity-widget'
+// import AccountCircleIcon from '@material-ui/icons/AccountCircle'
+// import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary'
+import { useHistory } from 'react-router'
+import { useSelector, useDispatch } from 'react-redux'
+// import { getUser } from '../store/user/user.selectors'
+// import userActions from '../store/user/user.actions'
+import beachesAction from '../store/beaches/beaches.actions'
 // import appActions from '../store/app/app.actions';
-import { Avatar } from '@material-ui/core';
-import { Image } from 'cloudinary-react';
-import lightblue from '@material-ui/core/colors/lightBlue';
-import { CameraAlt } from '@material-ui/icons';
-import styled from 'styled-components';
-import logo from '../logo.png';
+// import { Avatar } from '@material-ui/core'
+// import { Image } from 'cloudinary-react'
+import lightblue from '@material-ui/core/colors/lightBlue'
+import { Check } from '@material-ui/icons'
+// import { CameraAlt, Check } from '@material-ui/icons'
+
+import styled from 'styled-components'
+import logo from '../logo.png'
+import { getCountry } from '../store/beaches/beaches.reducer'
 
 const Logo = styled.div`
-    background-image: url(${logo});
-    background-size: contain;
-    background-repeat: no-repeat;
-    height: 40px;
-    width: 40px;
-`;
+  background-image: url(${logo});
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 40px;
+  width: 40px;
+`
 
 const LogoText = styled.div`
-    margin-right: 100%;
-    font-family: 'Alfa Slab One', cursive;
-    cursor: pointer;
-`;
+  font-family: 'Alfa Slab One', cursive;
+  cursor: pointer;
+`
 
 const useStyles = makeStyles(theme => ({
-    root: {
-        flexGrow: 1,
-    },
-    header: {
-        backgroundColor: lightblue[700],
-    },
-    menuButton: {
-        marginRight: 'auto',
-    },
-    title: {
-        flexGrow: 1,
-        fontFamily: 'Lacquer !important',
-    },
-}));
+  root: {
+    flexGrow: 1
+  },
+  header: {
+    backgroundColor: lightblue[700]
+  },
+  menuButton: {
+    marginRight: 'auto'
+  },
+  title: {
+    flexGrow: 1,
+    fontFamily: 'Lacquer !important'
+  }
+}))
 
 const useDrawerStyles = makeStyles({
-    list: {
-        width: 250,
-    },
-    fullList: {
-        width: 'auto',
-    },
-});
+  list: {
+    width: 250
+  },
+  fullList: {
+    width: 'auto'
+  }
+})
 
 export default function MenuAppBar() {
-    const classes = useStyles();
-    const [isOpen, toggleOpen] = React.useState(false);
-    const drawerClasses = useDrawerStyles();
-    const user = useSelector(getUser);
-    const isLoggedIn = user && user.id;
-    const history = useHistory();
+  const classes = useStyles()
+  const [isOpen, toggleOpen] = React.useState(false)
+  const drawerClasses = useDrawerStyles()
+  //   const user = useSelector(getUser)
+  const country = useSelector(getCountry)
+  //   const isLoggedIn = user && user.id
+  const history = useHistory()
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-    const logOut = () => {
-        netlifyIdentity.logout();
-        dispatch(userActions.logout.trigger());
-    };
+  //   const logOut = () => {
+  //     netlifyIdentity.logout()
+  //     dispatch(userActions.logout.trigger())
+  //   }
 
-    const login = () => {
-        netlifyIdentity.open('login');
-    };
+  //   const login = () => {
+  //     netlifyIdentity.open('login')
+  //   }
 
-    return (
-        <>
-            <Drawer open={isOpen} onClose={() => toggleOpen(!isOpen)} anchor="right">
-                <div
-                    className={drawerClasses.list}
-                    role="presentation"
-                    onClick={() => toggleOpen(false)}
-                    onKeyDown={() => toggleOpen(false)}
-                >
-                    <List>
-                        {isLoggedIn && (
+  return (
+    <>
+      <Drawer open={isOpen} onClose={() => toggleOpen(!isOpen)} anchor="right">
+        <div
+          className={drawerClasses.list}
+          role="presentation"
+          onClick={() => toggleOpen(false)}
+          onKeyDown={() => toggleOpen(false)}>
+          <List>
+            {/* {isLoggedIn && (
                             <>
                                 <ListItem button onClick={() => history.push('/profile')}>
                                     <ListItemIcon>
@@ -110,8 +113,8 @@ export default function MenuAppBar() {
                                 </ListItem>
                                 <Divider />
                             </>
-                        )}
-                        {isLoggedIn && (
+                        )} */}
+            {/* {isLoggedIn && (
                             <ListItem button onClick={() => history.push('/profile')}>
                                 <ListItemIcon>
                                     <PhotoLibraryIcon />
@@ -130,10 +133,38 @@ export default function MenuAppBar() {
                                 <CameraAlt />
                             </ListItemIcon>
                             <ListItemText primary={'Cameras'} />
-                        </ListItem>
-                    </List>
-                    <Divider />
-                    <List>
+                        </ListItem> */}
+            <ListItem>
+              <ListItemText primary={'Countries'} />
+            </ListItem>
+            <Divider />
+            <ListItem
+              button
+              onClick={() =>
+                dispatch(beachesAction.setCountry.trigger({ country: 'us' }))
+              }>
+              {country === 'us' && (
+                <ListItemIcon>
+                  <Check />
+                </ListItemIcon>
+              )}
+              <ListItemText primary={'USA'} />
+            </ListItem>
+            <ListItem
+              button
+              onClick={() =>
+                dispatch(beachesAction.setCountry.trigger({ country: 'pt' }))
+              }>
+              {country === 'pt' && (
+                <ListItemIcon>
+                  <Check />
+                </ListItemIcon>
+              )}
+              <ListItemText primary={'Portugal'} />
+            </ListItem>
+          </List>
+          {/* <Divider /> */}
+          {/* <List>
                         {isLoggedIn && (
                             <ListItem button onClick={logOut}>
                                 <ListItemIcon>
@@ -150,24 +181,22 @@ export default function MenuAppBar() {
                                 <ListItemText primary={'Log in'} />
                             </ListItem>
                         )}
-                    </List>
-                </div>
-            </Drawer>
-            <div className={classes.root}>
-                <AppBar position="static" className={classes.header}>
-                    <Toolbar>
-                        <IconButton
-                            edge="start"
-                            className={classes.menuButton}
-                            color="inherit"
-                            aria-label="menu"
-                            onClick={() => history.push('/')}
-                        >
-                            <Logo className={classes.title} />
-
-                        </IconButton>
-                        <LogoText onClick={() => history.push('/')}>howisthe.surf</LogoText>
-                        {/* {isLoggedIn ? (
+                    </List> */}
+        </div>
+      </Drawer>
+      <div className={classes.root}>
+        <AppBar position="static" className={classes.header}>
+          <Toolbar>
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="menu"
+              onClick={() => history.push('/')}>
+              <Logo className={classes.title} />
+            </IconButton>
+            <LogoText onClick={() => history.push('/')}>howisthe.surf</LogoText>
+            {/* {isLoggedIn ? (
                             <IconButton
                                 aria-label="account of current user"
                                 aria-controls="menu-appbar"
@@ -194,9 +223,18 @@ export default function MenuAppBar() {
                                 <MenuIcon />
                             </IconButton>
                         )} */}
-                    </Toolbar>
-                </AppBar>
-            </div>
-        </>
-    );
+            <IconButton
+              style={{ marginLeft: 'auto' }}
+              aria-label="menu"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={() => toggleOpen(!isOpen)}
+              color="inherit">
+              <MenuIcon />
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+      </div>
+    </>
+  )
 }
