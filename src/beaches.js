@@ -19,19 +19,11 @@ export default {
         name: 'Daytona (Main Street)',
         url:
           'https://cams.cdn-surfline.com/cdn-ec/ec-mainstreetpier/playlist.m3u8'
+      },
+      {
+        name: 'Jaxs Beach',
+        url: 'https://cams.cdn-surfline.com/cdn-ec/ec-jaxpierov/playlist.m3u8'
       }
-      // {
-      //     name: 'Daytona (Main Street)',
-      //     url: 'https://cams.cdn-surfline.com/cdn-ec/ec-mainstreetpier/playlist.m3u8',
-      // },
-      // {
-      //     name: 'Daytona (Main Street)',
-      //     url: 'https://cams.cdn-surfline.com/cdn-ec/ec-mainstreetpier/playlist.m3u8',
-      // },
-      // {
-      //     name: 'Daytona (Main Street)',
-      //     url: 'https://cams.cdn-surfline.com/cdn-ec/ec-mainstreetpier/playlist.m3u8',
-      // },
     ]
   },
 
