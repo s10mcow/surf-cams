@@ -46,6 +46,7 @@ serviceWorker.register({
         if (waitingServiceWorker) {
             waitingServiceWorker.addEventListener('statechange', event => {
                 if (event.target.state === 'activated') {
+                    persistor.purge();
                     window.location.reload();
                 }
             });
