@@ -24,6 +24,7 @@ const sagaMiddleware = createSagaMiddleware({
 const createReducer = createRootReducer => {
   const config = {
     key: 'root',
+    version: 1,
     whitelist: ['visibilityFilter', 'cameras', 'beaches'],
     storage,
     stateReconciler: hardSet,
