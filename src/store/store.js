@@ -3,6 +3,7 @@ import rootReducer from './reducers'
 import { createBrowserHistory } from 'history'
 import { routerMiddleware } from 'connected-react-router'
 import { persistReducer, persistStore } from 'redux-persist'
+import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
 import storage from 'redux-persist/lib/storage'
 import SagaManager from './sagas'
 import createSagaMiddleware from 'redux-saga'
@@ -23,9 +24,10 @@ const sagaMiddleware = createSagaMiddleware({
 const createReducer = createRootReducer => {
   const config = {
     key: 'root',
-    whitelist: ['visibilityFilter', 'cameras'],
-    blacklist: ['beaches'],
-    storage
+    whitelist: ['visibilityFilter', 'cameras', 'beaches'],
+    storage,
+    stateReconciler: hardSet,
+
   }
 
   return persistReducer(config, createRootReducer(history))

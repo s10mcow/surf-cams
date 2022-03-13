@@ -8,6 +8,11 @@ export default {
           'https://cams.cdn-surfline.com/cdn-ec/ec-flaglerbeach/playlist.m3u8'
       },
       {
+        name: 'Flagler2 Pier',
+        url:
+          'https://cams.cdn-surfline.com/cdn-ec/ec-flaglerbeach/playlist.m3u8'
+      },
+      {
         name: 'Matazanas Inlet',
         url: 'https://cams.cdn-surfline.com/cdn-ec/ec-matanzas/playlist.m3u8'
       },
