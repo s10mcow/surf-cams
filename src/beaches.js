@@ -23,6 +23,18 @@ export default {
       {
         name: 'Jaxs Beach',
         url: 'https://cams.cdn-surfline.com/cdn-ec/ec-jaxpierov/playlist.m3u8'
+      },
+      {
+        name: 'Ponce Inlet',
+        url: 'https://cams.cdn-surfline.com/cdn-ec/ec-ponceinlet/playlist.m3u8'
+      },
+      {
+        name: 'New Smyrna (North)',
+        url: 'https://cams.cdn-surfline.com/cdn-ec/ec-newsmynorth/playlist.m3u8'
+      },
+      {
+        name: 'New Smyrna (South)',
+        url: 'https://cams.cdn-surfline.com/cdn-ec/ec-newsmysouth/playlist.m3u8'
       }
     ]
   },

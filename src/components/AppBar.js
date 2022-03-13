@@ -230,7 +230,7 @@ export default function MenuAppBar() {
               aria-haspopup="true"
               onClick={() => toggleOpen(!isOpen)}
               color="inherit">
-              <MenuIcon />
+              {country === 'us' ? <MenuIcon /> : <MenuIcon />}
             </IconButton>
           </Toolbar>
         </AppBar>
