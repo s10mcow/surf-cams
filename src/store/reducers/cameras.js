@@ -1,4 +1,4 @@
-import beaches from '../../beaches'
+import beaches from '../../beach'
 
 const initalState = beaches.pt.beaches.slice(4, 6)
 
@@ -32,3 +32,6 @@ const cameras = (state = initalState, action) => {
 export default cameras
 
 export const getCameras = state => state && state.cameras
+
+
+

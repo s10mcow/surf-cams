@@ -1,4 +1,4 @@
-import countries from '../../beaches'
+import countries from '../../beach'
 import TYPES from './beaches.types'
 
 const initalState = { countries, country: 'pt' }
