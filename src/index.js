@@ -46,8 +46,9 @@ serviceWorker.register({
         if (waitingServiceWorker) {
             waitingServiceWorker.addEventListener('statechange', event => {
                 if (event.target.state === 'activated') {
-                    persistor.purge();
-                    window.location.reload();
+                    persistor.purge().then(() => {
+                        window.location.reload();
+                    })
                 }
             });
             waitingServiceWorker.postMessage({ type: 'SKIP_WAITING' });
