@@ -1,5 +1,5 @@
 import utils from './utils';
-import {beaches} from '../beaches.json';
+import {beaches} from '../beach.json';
 import Hls from 'hls.js';
 const cameras = {};
 
