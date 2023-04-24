@@ -9,7 +9,6 @@ import { useDispatch } from 'react-redux'
 import actions from '../store/feedback/feedback.actions'
 import { useHistory } from 'react-router'
 import { ForecastWidget } from './ForecastWidget'
-// import qr from '../assets/qr.png'
 
 export default function PlayersContainer({
   cameras,
