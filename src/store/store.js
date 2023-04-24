@@ -27,8 +27,8 @@ const createReducer = createRootReducer => {
     version: 1,
     whitelist: ['visibilityFilter', 'cameras', 'beaches'],
     storage,
-    stateReconciler: hardSet,
 
+    stateReconciler: hardSet
   }
 
   return persistReducer(config, createRootReducer(history))

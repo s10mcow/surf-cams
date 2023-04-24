@@ -8,6 +8,7 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import { useDispatch } from 'react-redux'
 import actions from '../store/feedback/feedback.actions'
 import { useHistory } from 'react-router'
+import { ForecastWidget } from './ForecastWidget'
 // import qr from '../assets/qr.png'
 
 export default function PlayersContainer({
@@ -60,7 +61,7 @@ export default function PlayersContainer({
             We all hate ads.
             <br /> Thats why we're here.
             <br /> If you like what you see.
-            <br /> Buy me a beer...            
+            <br /> Buy me a beer...
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -87,7 +88,7 @@ export default function PlayersContainer({
       <Button color="primary" onClick={addNewCamera}>
         Add Camera
       </Button>
-      <div id="wg_target_div_512670_72189470" />
+      <ForecastWidget />
     </div>
   )
 }

@@ -141,14 +141,14 @@ export default function MenuAppBar() {
             <ListItem
               button
               onClick={() =>
-                dispatch(beachesAction.setCountry.trigger({ country: 'us' }))
+                dispatch(beachesAction.setCountry.trigger({ country: 'fl' }))
               }>
               {country === 'us' && (
                 <ListItemIcon>
                   <Check />
                 </ListItemIcon>
               )}
-              <ListItemText primary={'USA'} />
+              <ListItemText primary={'Florida'} />
             </ListItem>
             <ListItem
               button
@@ -161,6 +161,42 @@ export default function MenuAppBar() {
                 </ListItemIcon>
               )}
               <ListItemText primary={'Portugal'} />
+            </ListItem>
+            <ListItem
+              button
+              onClick={() =>
+                dispatch(beachesAction.setCountry.trigger({ country: 'es' }))
+              }>
+              {country === 'es' && (
+                <ListItemIcon>
+                  <Check />
+                </ListItemIcon>
+              )}
+              <ListItemText primary={'Spain'} />
+            </ListItem>
+            <ListItem
+              button
+              onClick={() =>
+                dispatch(beachesAction.setCountry.trigger({ country: 'fr' }))
+              }>
+              {country === 'fr' && (
+                <ListItemIcon>
+                  <Check />
+                </ListItemIcon>
+              )}
+              <ListItemText primary={'France'} />
+            </ListItem>
+            <ListItem
+              button
+              onClick={() =>
+                dispatch(beachesAction.setCountry.trigger({ country: 'uk' }))
+              }>
+              {country === 'uk' && (
+                <ListItemIcon>
+                  <Check />
+                </ListItemIcon>
+              )}
+              <ListItemText primary={'UK'} />
             </ListItem>
           </List>
           {/* <Divider /> */}

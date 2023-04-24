@@ -1,8 +1,8 @@
-import countries from '../../beach'
+import countries from '../../cams/beach'
 import TYPES from './beaches.types'
 
 const initalState = { countries, country: 'pt' }
-
+console.log(initalState)
 const reducer = (state = initalState, action) => {
   console.log(action)
   switch (action.type) {
