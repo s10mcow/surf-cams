@@ -2,10 +2,10 @@ export const pt = {
   country: 'Portugal',
   title: 'Portugal Beach Cams',
   beaches: [
-    {
-      name: 'Arrifana (Surfline)',
-      url: 'https://cams.cdn-surfline.com/cdn-int/pt-arrifana/playlist.m3u8'
-    },
+    // {
+    //   name: 'Arrifana (Surfline)',
+    //   url: 'https://cams.cdn-surfline.com/cdn-int/pt-arrifana/playlist.m3u8'
+    // },
     {
       name: 'Monte Clerigo',
       url: 'https://video-auth1.iol.pt/beachcam/bcmonteclerigo/playlist.m3u8'
@@ -72,18 +72,18 @@ export const pt = {
       name: 'Luz (BeachCam)',
       url: 'https://video-auth1.iol.pt/beachcam/luz/playlist.m3u8'
     },
-    {
-      name: 'Luz (Surfline)',
-      url: 'https://cams.cdn-surfline.com/cdn-int/pt-praiadaluz/playlist.m3u8'
-    },
+    // {
+    //   name: 'Luz (Surfline)',
+    //   url: 'https://cams.cdn-surfline.com/cdn-int/pt-praiadaluz/playlist.m3u8'
+    // },
     {
       name: 'Lagos (BeachCam)',
       url: 'https://video-auth1.iol.pt/beachcam/meiapraia/playlist.m3u8'
     },
-    {
-      name: 'Lagos (Surfline)',
-      url: 'https://cams.cdn-surfline.com/cdn-int/pt-meiapraia/playlist.m3u8'
-    },
+    // {
+    //   name: 'Lagos (Surfline)',
+    //   url: 'https://cams.cdn-surfline.com/cdn-int/pt-meiapraia/playlist.m3u8'
+    // },
 
     {
       name: 'Amoreira',
@@ -93,10 +93,10 @@ export const pt = {
       name: 'Zambujeira do Mar',
       url: 'https://video-auth1.iol.pt/beachcam/zambujeira/playlist.m3u8'
     },
-    {
-      name: 'Peniche - Super Tubos (Surfline)',
-      url: 'https://cams.cdn-surfline.com/cdn-int/pt-supertubes/playlist.m3u8'
-    },
+    // {
+    //   name: 'Peniche - Super Tubos (Surfline)',
+    //   url: 'https://cams.cdn-surfline.com/cdn-int/pt-supertubes/playlist.m3u8'
+    // },
     {
       name: 'Peniche - Super Tubos (BeachCam)',
       url: 'https://video-auth1.iol.pt/beachcam/supertubos/playlist.m3u8'
@@ -105,14 +105,14 @@ export const pt = {
       name: 'São Torpes (BeachCam)',
       url: 'https://video-auth1.iol.pt/beachcam/saotorpes/playlist.m3u8'
     },
-    {
-      name: 'São Torpes (Surfline)',
-      url: 'https://cams.cdn-surfline.com/cdn-int/pt-storpespier/playlist.m3u8'
-    },
-    {
-      name: 'Nazare (Surfline)',
-      url: 'https://cams.cdn-surfline.com/cdn-int/pt-nazareov/playlist.m3u8'
-    },
+    // {
+    //   name: 'São Torpes (Surfline)',
+    //   url: 'https://cams.cdn-surfline.com/cdn-int/pt-storpespier/playlist.m3u8'
+    // },
+    // {
+    //   name: 'Nazare (Surfline)',
+    //   url: 'https://cams.cdn-surfline.com/cdn-int/pt-nazareov/playlist.m3u8'
+    // },
     {
       name: 'Nazare - Praia do Norte (BeachCam)',
       url: 'https://video-auth1.iol.pt/beachcam/canhaonazare/playlist.m3u8'
