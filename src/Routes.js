@@ -9,6 +9,7 @@ import Profile from './containers/Profile';
 const url = 'https://howisthe.surf/'; // supply the url of your Netlify site instance. VERY IMPORTANT. no point putting in env var since this is public anyway
 
 export default function Routes() {
+
     return (
         <IdentityContextProvider url={url}>
             <Switch>
